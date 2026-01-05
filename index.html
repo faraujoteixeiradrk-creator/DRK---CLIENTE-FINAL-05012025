@@ -172,6 +172,23 @@
             border: 4px dashed var(--qr-border-color, #0ea5e9);
             background-color: white;
         }
+        
+        /* PESTAÑAS DE RESULTADOS */
+        .tab-result-btn {
+            background: transparent;
+            color: #64748b;
+        }
+        .tab-result-btn.active {
+            color: #0ea5e9;
+            border-bottom-color: #0ea5e9 !important;
+        }
+        .tab-result-content {
+            animation: fadeIn 0.3s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
     </style>
 </head>
 <body class="flex flex-col min-h-screen text-slate-800 drk-active">
@@ -1225,7 +1242,7 @@
                     <span>AÑADIR A DUAL</span>
                 </button>
                 
-                <button id="send-offer-btn" class="w-full bg-cta-red-500 hover:bg-cta-red-600 text-white font-bold py-3 px-6 rounded-xl shadow-lg transform transition active:scale-95 flex items-center justify-center gap-3 mb-3">
+                <button id="send-offer-btn" class="w-full bg-cta-red-500 hover:bg-cta-red-600 text-white font-bold py-3 px-6 rounded-xl shadow-lg transform transition active:scale-95 flex items-center justify-center gap-3 mb-3" style="display: none;">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2v-2m-4-4l-4 4m0 0l-4-4m4 4V5"></path></svg>
                     <span>COPIAR COMPARATIVO</span>
                 </button>
@@ -1236,7 +1253,35 @@
                     <span id="request-improvement-text">SOLICITAR MEJORA A DRK</span>
                 </button>
                 
-                <button onclick="document.getElementById('details-container').classList.toggle('hidden')" class="text-center text-drk-800 font-bold text-sm hover:underline flex items-center justify-center gap-1" id="details-toggle-btn"><span id="details-toggle-text"></span></button>
+                <button onclick="document.getElementById('details-container').classList.toggle('hidden')" class="text-center text-drk-800 font-bold text-sm hover:underline flex items-center justify-center gap-1" id="details-toggle-btn" style="display: none;"><span id="details-toggle-text"></span></button>
+            </div>
+            
+            <!-- PESTAÑAS HORIZONTALES -->
+            <div class="mb-6">
+                <div class="flex gap-2 border-b-2 border-slate-200 mb-4 overflow-x-auto">
+                    <button onclick="switchResultTab('tab-resumen')" id="btn-tab-resumen" class="tab-result-btn px-6 py-3 font-bold text-sm transition-all border-b-4 border-transparent hover:border-drk-400 whitespace-nowrap active">
+                        Resumen
+                    </button>
+                    <button onclick="switchResultTab('tab-precios')" id="btn-tab-precios" class="tab-result-btn px-6 py-3 font-bold text-sm transition-all border-b-4 border-transparent hover:border-drk-400 whitespace-nowrap">
+                        Precios
+                    </button>
+                    <button onclick="switchResultTab('tab-calculo')" id="btn-tab-calculo" class="tab-result-btn px-6 py-3 font-bold text-sm transition-all border-b-4 border-transparent hover:border-drk-400 whitespace-nowrap">
+                        Cálculo Oficial
+                    </button>
+                </div>
+                
+                <!-- Contenido de pestañas -->
+                <div id="tab-resumen" class="tab-result-content">
+                    <div id="resumen-content" class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm"></div>
+                </div>
+                
+                <div id="tab-precios" class="tab-result-content hidden">
+                    <div id="precios-content" class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm"></div>
+                </div>
+                
+                <div id="tab-calculo" class="tab-result-content hidden">
+                    <div id="calculo-content" class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm"></div>
+                </div>
             </div>
             
             <div id="details-container" class="hidden space-y-6">
@@ -4254,17 +4299,22 @@
                 }
             }
             
-            const detailsContainer = document.getElementById('details-container');
-
-            detailsContainer.innerHTML = `
-                <h3 id="extracted-data-header" class="text-lg font-bold text-slate-800 border-l-4 ${brand.BORDER.replace('border-', 'border-')} pl-3">${tr('Datos Extraídos')}</h3>
-                <div id="user-consumption-details" class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm text-sm">${consumptionHTML}</div>
-                ${preciosHTML}
-                <h3 class="text-lg font-bold text-slate-800 border-l-4 border-green-500 pl-3" style="border-left-color: ${brand.QR_CENTER_BG};">${tr('Cálculo Oficial')}</h3>
-                <div id="cost-breakdown" class="bg-white p-0 rounded-xl border border-slate-200 shadow-sm overflow-hidden text-sm">
-                    ${breakdownHTML}
-                </div>
+            // NUEVO: Llenar las 3 pestañas con contenido
+            document.getElementById('resumen-content').innerHTML = `
+                <h3 class="text-lg font-bold text-slate-800 mb-4">${tr('Datos Extraídos')}</h3>
+                ${consumptionHTML}
             `;
+            
+            document.getElementById('precios-content').innerHTML = preciosHTML || '<p class="text-slate-500">No hay información de precios disponible.</p>';
+            
+            document.getElementById('calculo-content').innerHTML = `
+                <h3 class="text-lg font-bold text-slate-800 mb-4">${tr('Cálculo Oficial')}</h3>
+                ${breakdownHTML}
+            `;
+            
+            // Mantener detailsContainer oculto (ya no se usa)
+            const detailsContainer = document.getElementById('details-container');
+            detailsContainer.innerHTML = '';
             
             console.log('renderResultsUI completed successfully');
             } catch (error) {
@@ -13796,6 +13846,24 @@ Destinatarios: F.araujo@drk.es, rguerra@drk.es, l.grande@drk.es
             if (scannerView) scannerView.classList.add('hidden');
             if (resultsView) resultsView.classList.add('hidden');
             if (multicupsSagaView) multicupsSagaView.classList.add('hidden');
+        }
+
+        function switchResultTab(tabId) {
+            // Ocultar todos los contenidos de pestañas
+            document.querySelectorAll('.tab-result-content').forEach(content => {
+                content.classList.add('hidden');
+            });
+            
+            // Desactivar todos los botones de pestañas
+            document.querySelectorAll('.tab-result-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Mostrar el contenido seleccionado
+            document.getElementById(tabId).classList.remove('hidden');
+            
+            // Activar el botón correspondiente
+            document.getElementById('btn-' + tabId).classList.add('active');
         }
 
         function goToInicio() {
