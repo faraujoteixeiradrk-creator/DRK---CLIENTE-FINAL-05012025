@@ -204,20 +204,19 @@
             <div class="flex items-center gap-3">
                 <div class="relative">
                     <select id="language-selector" onchange="if(window.LANG) window.LANG.change(this.value)" 
-                            class="bg-drk-800 text-white text-xs px-3 py-1.5 rounded border border-drk-700 cursor-pointer hover:bg-drk-700 transition-colors appearance-none pr-8 font-semibold">
-                        <option value="es">🇪🇸 ES</option>
-                        <option value="en">🇬🇧 EN</option>
-                        <option value="zh">🇨🇳 ZH</option>
-                        <option value="de">🇩🇪 DE</option>
-                        <option value="fr">🇫🇷 FR</option>
+                            class="bg-gradient-to-r from-drk-700 to-drk-800 text-white text-base px-5 py-3 rounded-lg border-2 border-drk-500 cursor-pointer hover:from-drk-600 hover:to-drk-700 transition-all appearance-none pr-10 font-bold shadow-lg">
+                        <option value="es">🇪🇸 Español</option>
+                        <option value="en">🇬🇧 English</option>
+                        <option value="pt">🇵🇹 Português</option>
+                        <option value="fr">🇫🇷 Français</option>
                     </select>
-                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white">
-                        <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 20 20">
+                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-white">
+                        <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
                             <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
                         </svg>
                     </div>
                 </div>
-                <span class="text-xs bg-drk-800 px-2 py-1 rounded text-drk-100" id="app-subtitle">Selector</span>
+                <span class="text-sm bg-drk-800 px-3 py-2 rounded-lg text-drk-100 font-semibold" id="app-subtitle">🌍 Multilenguaje</span>
             </div>
         </div>
     </div>
