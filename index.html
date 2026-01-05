@@ -1259,13 +1259,13 @@
             <!-- PESTAÑAS HORIZONTALES -->
             <div class="mb-6">
                 <div class="flex gap-2 border-b-2 border-slate-200 mb-4 overflow-x-auto">
-                    <button onclick="switchResultTab('tab-resumen')" id="btn-tab-resumen" class="tab-result-btn px-6 py-3 font-bold text-sm transition-all border-b-4 border-transparent hover:border-drk-400 whitespace-nowrap active">
+                    <button onclick="switchResultTab('tab-resumen')" id="btn-tab-resumen" class="tab-result-btn px-6 py-3 font-bold text-sm transition-all border-b-4 border-transparent hover:border-drk-400 whitespace-nowrap active" data-i18n="Resumen">
                         Resumen
                     </button>
-                    <button onclick="switchResultTab('tab-precios')" id="btn-tab-precios" class="tab-result-btn px-6 py-3 font-bold text-sm transition-all border-b-4 border-transparent hover:border-drk-400 whitespace-nowrap">
+                    <button onclick="switchResultTab('tab-precios')" id="btn-tab-precios" class="tab-result-btn px-6 py-3 font-bold text-sm transition-all border-b-4 border-transparent hover:border-drk-400 whitespace-nowrap" data-i18n="Precios">
                         Precios
                     </button>
-                    <button onclick="switchResultTab('tab-calculo')" id="btn-tab-calculo" class="tab-result-btn px-6 py-3 font-bold text-sm transition-all border-b-4 border-transparent hover:border-drk-400 whitespace-nowrap">
+                    <button onclick="switchResultTab('tab-calculo')" id="btn-tab-calculo" class="tab-result-btn px-6 py-3 font-bold text-sm transition-all border-b-4 border-transparent hover:border-drk-400 whitespace-nowrap" data-i18n="Cálculo Oficial">
                         Cálculo Oficial
                     </button>
                 </div>
@@ -20856,8 +20856,10 @@ ${clientName}
                 "Potencia Contratada (kW)": { en: "Contracted Power (kW)", zh: "签约功率 (kW)", de: "Vertragsleistung (kW)", fr: "Puissance Contractée (kW)" },
                 
                 // Interfaz de resultados
+                "Resumen": { en: "Summary", pt: "Resumo", fr: "Résumé" },
+                "Precios": { en: "Prices", pt: "Preços", fr: "Prix" },
                 "Datos Extraídos": { en: "Extracted Data", zh: "提取数据", de: "Extrahierte Daten", fr: "Données Extraites" },
-                "Cálculo Oficial": { en: "Official Calculation", zh: "官方计算", de: "Offizielle Berechnung", fr: "Calcul Officiel" },
+                "Cálculo Oficial": { en: "Official Calculation", zh: "官方计算", de: "Offizielle Berechnung", fr: "Calcul Officiel", pt: "Cálculo Oficial" },
                 "Simulación": { en: "Simulation", zh: "模拟", de: "Simulation", fr: "Simulation" },
                 "Subtotal Potencia": { en: "Power Subtotal", zh: "功率小计", de: "Leistung Zwischensumme", fr: "Sous-total Puissance" },
                 "Precios de la Oferta Consolidada": { en: "Consolidated Offer Prices", zh: "合并报价价格", de: "Konsolidierte Angebotspreise", fr: "Prix de l'Offre Consolidée" },
