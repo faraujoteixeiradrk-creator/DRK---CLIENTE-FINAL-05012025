@@ -2199,11 +2199,11 @@
             document.querySelectorAll('.hidden-period').forEach(el => el.style.display = 'none');
             document.getElementById('tariff-display-badge').textContent = '0';
             
-            // FINALMENTE: Mostrar pantalla inicial y selector de modo
+            // FINALMENTE: Mostrar pantalla inicial y mantener oculto selector de modo
             document.getElementById('screen-inicio')?.classList.add('active');
             const modoComparacionSection = document.getElementById('modo-comparacion-section');
             if (modoComparacionSection) {
-                modoComparacionSection.style.display = 'block';
+                modoComparacionSection.style.display = 'none'; // Mantener oculto
             }
             
             console.log('✅ resetToLanding completada - screen-inicio activa');
@@ -2237,10 +2237,10 @@
             // Solo ocultar initial-view
             document.getElementById('initial-view')?.classList.add('hidden');
             
-            // Mostrar la pantalla de selección de tarifa (landing-view)
-            document.getElementById('landing-view')?.classList.remove('hidden');
+            // Mostrar la pantalla inicial (screen-inicio)
+            document.getElementById('screen-inicio')?.classList.add('active');
             
-            console.log('✅ Vuelto a landing-view sin resetear');
+            console.log('✅ Vuelto a screen-inicio');
         };
         
         // NUEVA FUNCIÓN: Volver desde multicups-saga-view SIN hacer reset completo
@@ -2337,6 +2337,7 @@
                 toggleMultiCupsInputPeriods(currentTariffType, 'input');
 
                 // CRÍTICO: Ocultar todas las vistas antes de mostrar initial-view
+                document.getElementById('screen-inicio').classList.remove('active'); // Ocultar pantalla inicio
                 document.getElementById('landing-view').classList.add('hidden');
                 document.getElementById('multicups-saga-view').classList.add('hidden');
                 document.getElementById('initial-view').classList.remove('hidden');
@@ -12918,6 +12919,7 @@ Destinatarios: F.araujo@drk.es, rguerra@drk.es, l.grande@drk.es
             if (scannerRunning) return;
             
             // FEEDBACK INMEDIATO: Mostrar que está cargando
+            document.getElementById('screen-inicio').classList.remove('active'); // Ocultar pantalla inicio
             document.getElementById('initial-view').classList.add('hidden');
             document.getElementById('scanner-view').classList.remove('hidden');
             document.getElementById('scanner-view').classList.add('flex');
