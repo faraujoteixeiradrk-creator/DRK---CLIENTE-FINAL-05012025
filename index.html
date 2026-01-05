@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DRK Energía - Portal del Cliente</title>
+    <title>DRK - Comparador de Tarifas</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.min.js"></script>
     <script>
         tailwind.config = {
             theme: {
@@ -27,136 +28,623 @@
     </script>
     <style>
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            background: linear-gradient(135deg, #0c4a6e 0%, #075985 50%, #0ea5e9 100%);
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
             min-height: 100vh;
         }
-        
-        .glass-effect {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-        }
-        
-        .option-card {
-            transition: all 0.3s ease;
-            cursor: pointer;
+
+        .screen { display: none; }
+        .screen.active { display: block; }
+
+        #video-container {
             position: relative;
+            width: 100%;
+            max-width: 640px;
+            margin: 0 auto;
+            border-radius: 1rem;
+            overflow: hidden;
+            background: #000;
+        }
+
+        #qr-video {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .scan-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 250px;
+            height: 250px;
+            border: 3px solid #38bdf8;
+            border-radius: 20px;
+            box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.5), 0 0 40px rgba(56, 189, 248, 0.6);
+            animation: scan-pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes scan-pulse {
+            0%, 100% { box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.5), 0 0 40px rgba(56, 189, 248, 0.6); }
+            50% { box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.5), 0 0 60px rgba(56, 189, 248, 0.9); }
+        }
+
+        .scan-line {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #38bdf8, transparent);
+            animation: scan-move 2s linear infinite;
+        }
+
+        @keyframes scan-move {
+            0% { top: 0; }
+            100% { top: 100%; }
+        }
+
+        .result-card {
+            background: white;
+            border-radius: 1.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             overflow: hidden;
         }
-        
-        .option-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(14, 165, 233, 0.3);
+
+        .result-header {
+            background: linear-gradient(135deg, #0369a1 0%, #0ea5e9 100%);
+            color: white;
+            padding: 2rem;
+            text-align: center;
         }
-        
-        .icon-circle {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 1rem;
-            background: linear-gradient(135deg, #0ea5e9 0%, #38bdf8 100%);
-            box-shadow: 0 8px 16px rgba(14, 165, 233, 0.3);
+
+        .savings-amount {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: #16a34a;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .price-box {
+            padding: 1.5rem;
+            border-radius: 1rem;
+            text-align: center;
+        }
+
+        .price-current {
+            background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
+            border: 2px solid #fca5a5;
+        }
+
+        .price-new {
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+            border: 2px solid #86efac;
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
             transition: all 0.3s ease;
         }
-        
-        .option-card:hover .icon-circle {
-            transform: scale(1.1) rotate(5deg);
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(14, 165, 233, 0.4);
         }
-        
-        .pulse-animation {
-            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-        }
-        
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: .7; }
-        }
-        
-        .fade-in {
-            animation: fadeIn 0.6s ease-out forwards;
-            opacity: 0;
-        }
-        
-        @keyframes fadeIn {
-            to { opacity: 1; }
-        }
-        
-        .stagger-1 { animation-delay: 0.1s; }
-        .stagger-2 { animation-delay: 0.2s; }
-        .stagger-3 { animation-delay: 0.3s; }
-        .stagger-4 { animation-delay: 0.4s; }
-        .stagger-5 { animation-delay: 0.5s; }
     </style>
 </head>
-<body class="p-4 md:p-8">
-    
-    <div class="max-w-6xl mx-auto">
-        
-        <!-- Header -->
-        <div class="text-center mb-8 fade-in">
-            <div class="inline-block glass-effect rounded-3xl px-8 py-6 mb-6">
-                <h1 class="text-4xl md:text-5xl font-bold text-drk-900 mb-2">
-                    DRK ENERGÍA
-                </h1>
-                <p class="text-lg text-drk-700 font-medium">
-                    Tu Energía, Tu Elección Inteligente
-                </p>
-            </div>
-        </div>
+<body>
 
-        <!-- Grid de Opciones -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+    <!-- PANTALLA 1: Inicio -->
+    <div id="screen-inicio" class="screen active">
+        <div class="max-w-4xl mx-auto px-4 py-8">
             
-            <!-- BOTÓN 1: Comparador -->
-            <div class="option-card glass-effect rounded-2xl p-6 shadow-xl fade-in stagger-1" 
-                 onclick="window.location.href='comparador.html'">
-                <div class="icon-circle">
-                    <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z"/>
-                    </svg>
-                </div>
-                <h3 class="text-xl font-bold text-drk-900 mb-2 text-center">
+            <!-- Header -->
+            <div class="text-center mb-8">
+                <a href="index.html" class="inline-block text-drk-600 hover:text-drk-800 mb-4">
+                    ← Volver al inicio
+                </a>
+                <h1 class="text-4xl md:text-5xl font-bold text-drk-900 mb-3">
                     Comparador de Tarifas
-                </h3>
-                <p class="text-drk-700 text-center text-sm">
-                    Escanea tu factura y descubre cuánto puedes ahorrar
+                </h1>
+                <p class="text-xl text-slate-600">
+                    Escanea el QR de tu factura y descubre cuánto puedes ahorrar
                 </p>
-                <div class="mt-4 text-center">
-                    <span class="inline-block bg-drk-500 text-white text-xs px-3 py-1 rounded-full">
-                        ¡Ahorra hasta un 30%!
-                    </span>
-                </div>
             </div>
 
-            <!-- BOTÓN 2-6: Resto de servicios -->
-            <div class="option-card glass-effect rounded-2xl p-6 shadow-xl fade-in stagger-2 opacity-60" 
-                 onclick="alert('Próximamente disponible')">
-                <div class="icon-circle" style="background: linear-gradient(135deg, #94a3b8 0%, #cbd5e1 100%);">
-                    <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
-                    </svg>
+            <!-- Tarjeta principal -->
+            <div class="bg-white rounded-2xl shadow-xl p-8 max-w-2xl mx-auto">
+                
+                <div class="text-center mb-8">
+                    <div class="inline-flex items-center justify-center w-24 h-24 rounded-full bg-drk-100 mb-4">
+                        <svg class="w-12 h-12 text-drk-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z"/>
+                        </svg>
+                    </div>
+                    <h2 class="text-2xl font-bold text-slate-800 mb-2">
+                        Escanea tu factura
+                    </h2>
+                    <p class="text-slate-600">
+                        Busca el código QR en tu factura de electricidad y escanéalo con tu cámara
+                    </p>
                 </div>
-                <h3 class="text-xl font-bold text-gray-700 mb-2 text-center">Más Servicios</h3>
-                <p class="text-gray-600 text-center text-sm">Próximamente</p>
+
+                <!-- Botón Escanear -->
+                <button onclick="startScanner()" class="btn-primary w-full py-6 text-white text-xl font-bold rounded-xl shadow-lg">
+                    <div class="flex items-center justify-center gap-3">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/>
+                        </svg>
+                        <span>ESCANEAR QR AHORA</span>
+                    </div>
+                </button>
+
+                <!-- Info adicional -->
+                <div class="mt-6 p-4 bg-blue-50 rounded-lg border border-blue-200">
+                    <p class="text-sm text-blue-800">
+                        <strong>💡 Consejo:</strong> Asegúrate de tener buena iluminación y mantén el código QR centrado en la cámara.
+                    </p>
+                </div>
+
             </div>
 
         </div>
-
-        <!-- Footer -->
-        <div class="text-center glass-effect rounded-2xl p-6 fade-in">
-            <p class="text-drk-900 font-medium mb-2">¿Necesitas ayuda?</p>
-            <div class="flex flex-wrap justify-center gap-4 text-sm text-drk-700">
-                <a href="tel:+34900000000" class="hover:text-drk-500">📞 900 000 000</a>
-                <a href="mailto:info@drkenergia.com" class="hover:text-drk-500">✉️ info@drkenergia.com</a>
-            </div>
-            <p class="text-xs text-drk-600 mt-4">© 2025 DRK Energía</p>
-        </div>
-
     </div>
+
+    <!-- PANTALLA 2: Escáner -->
+    <div id="screen-scanner" class="screen">
+        <div class="max-w-4xl mx-auto px-4 py-8">
+            
+            <div class="text-center mb-6">
+                <h2 class="text-3xl font-bold text-slate-800 mb-2">
+                    Escaneando tu factura...
+                </h2>
+                <p class="text-slate-600">
+                    Apunta la cámara al código QR de tu factura
+                </p>
+            </div>
+
+            <!-- Video Container -->
+            <div id="video-container" class="mb-6">
+                <video id="qr-video" playsinline></video>
+                <div class="scan-overlay">
+                    <div class="scan-line"></div>
+                </div>
+            </div>
+
+            <!-- Estado del escaneo -->
+            <div class="text-center">
+                <p id="scan-status" class="text-lg text-slate-600 mb-4">
+                    Buscando código QR...
+                </p>
+                <button onclick="stopScanner()" class="px-6 py-3 bg-slate-200 hover:bg-slate-300 text-slate-800 font-semibold rounded-xl transition-all">
+                    Cancelar
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- PANTALLA 3: Cargando -->
+    <div id="screen-loading" class="screen">
+        <div class="max-w-4xl mx-auto px-4 py-8">
+            <div class="text-center">
+                <div class="inline-block animate-spin rounded-full h-16 w-16 border-b-4 border-drk-500 mb-4"></div>
+                <h2 class="text-2xl font-bold text-slate-800 mb-2">Calculando tu ahorro...</h2>
+                <p class="text-slate-600">Analizando los datos de tu factura</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- PANTALLA 4: Resultados -->
+    <div id="screen-results" class="screen">
+        <div class="max-w-4xl mx-auto px-4 py-8">
+            
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-bold text-slate-800 mb-2">
+                    ¡Análisis completado!
+                </h2>
+                <p class="text-slate-600">
+                    Estos son tus resultados de ahorro
+                </p>
+            </div>
+
+            <!-- Tarjeta de resultados -->
+            <div class="result-card fade-in max-w-3xl mx-auto">
+                
+                <!-- Header -->
+                <div class="result-header">
+                    <h3 class="text-2xl font-bold mb-2" id="tariff-name">DRK FIJO 4</h3>
+                    <p class="text-blue-100">Tu nueva tarifa optimizada</p>
+                </div>
+
+                <!-- Ahorro -->
+                <div class="p-8 text-center border-b border-slate-200">
+                    <p class="text-lg text-slate-600 mb-2">TU AHORRO ANUAL ESTIMADO</p>
+                    <div class="savings-amount" id="annual-savings">335,07 €</div>
+                    <p class="text-sm text-slate-500 mt-2" id="period-info">Total Periodo (60 días): 157,76 €</p>
+                </div>
+
+                <!-- Comparativa de precios -->
+                <div class="p-8 grid md:grid-cols-2 gap-6">
+                    
+                    <!-- Precio actual -->
+                    <div class="price-box price-current">
+                        <p class="text-sm font-semibold text-red-700 mb-2">TU COSTE ACTUAL</p>
+                        <div class="text-4xl font-bold text-red-600 mb-2" id="current-annual">959,71 €</div>
+                        <p class="text-sm text-red-600">/año</p>
+                        <hr class="my-4 border-red-300">
+                        <div class="text-2xl font-semibold text-red-700" id="current-monthly">79,98 €</div>
+                        <p class="text-xs text-red-600">/mes</p>
+                    </div>
+
+                    <!-- Precio nuevo -->
+                    <div class="price-box price-new">
+                        <p class="text-sm font-semibold text-green-700 mb-2">TU NUEVO COSTE DRK</p>
+                        <div class="text-4xl font-bold text-green-600 mb-2" id="new-annual">624,63 €</div>
+                        <p class="text-sm text-green-600">/año</p>
+                        <hr class="my-4 border-green-300">
+                        <div class="text-2xl font-semibold text-green-700" id="new-monthly">52,05 €</div>
+                        <p class="text-xs text-green-600">/mes</p>
+                    </div>
+
+                </div>
+
+                <!-- Detalles de precios -->
+                <div class="p-8 bg-slate-50">
+                    <h4 class="font-bold text-slate-800 mb-4 text-lg">Precios de la Oferta Consolidada</h4>
+                    
+                    <!-- Potencia -->
+                    <div class="mb-4">
+                        <p class="font-semibold text-slate-700 mb-2">POTENCIA (€/kW/día):</p>
+                        <div class="flex justify-between text-sm">
+                            <span class="text-slate-600">P1:</span>
+                            <span class="font-mono font-semibold" id="price-p1">0,073782</span>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span class="text-slate-600">P2:</span>
+                            <span class="font-mono font-semibold" id="price-p2">0,001911</span>
+                        </div>
+                    </div>
+
+                    <!-- Energía -->
+                    <div>
+                        <p class="font-semibold text-slate-700 mb-2">ENERGÍA (€/kWh):</p>
+                        <div class="flex justify-between text-sm">
+                            <span class="text-slate-600">E1 (Punta):</span>
+                            <span class="font-mono font-semibold" id="price-e1">0,138000</span>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span class="text-slate-600">E2 (Llano):</span>
+                            <span class="font-mono font-semibold" id="price-e2">0,138000</span>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span class="text-slate-600">E3 (Valle):</span>
+                            <span class="font-mono font-semibold" id="price-e3">0,138000</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Botones de acción -->
+                <div class="p-8 grid md:grid-cols-2 gap-4">
+                    <button onclick="window.location.href='index.html'" class="px-6 py-4 bg-slate-200 hover:bg-slate-300 text-slate-800 font-semibold rounded-xl transition-all">
+                        ← Volver al inicio
+                    </button>
+                    <button onclick="location.reload()" class="btn-primary px-6 py-4 text-white font-semibold rounded-xl">
+                        Escanear otra factura
+                    </button>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        // ========================================
+        // CONFIGURACIÓN
+        // ========================================
+        const TARIFF_CONFIG = {
+            '2.0TD': { 
+                sheetId: '19CBiWVvxHoWW0fqdbSbLGs-hoISQGORAfebBztFYi3w', 
+                periods: 3, 
+                powerPeriods: 2 
+            }
+        };
+
+        const IVA_RATE = 0.21;
+        const IE_RATE = 0.05113;
+        const ANNUAL_DAYS = 365;
+
+        // ========================================
+        // VARIABLES GLOBALES
+        // ========================================
+        let videoStream = null;
+        let scanningInterval = null;
+        let currentTariffs = { '2.0TD': [] };
+
+        // ========================================
+        // FUNCIONES DE NAVEGACIÓN
+        // ========================================
+        function showScreen(screenId) {
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            document.getElementById(screenId).classList.add('active');
+        }
+
+        // ========================================
+        // CARGA DE TARIFAS
+        // ========================================
+        async function loadTariffs() {
+            const url = `https://docs.google.com/spreadsheets/d/${TARIFF_CONFIG['2.0TD'].sheetId}/gviz/tq?tqx=out:csv&gid=0&t=${Date.now()}`;
+            
+            try {
+                const response = await fetch(url);
+                const text = await response.text();
+                currentTariffs['2.0TD'] = parseCSV(text);
+                console.log('✅ Tarifas cargadas:', currentTariffs['2.0TD'].length);
+            } catch (error) {
+                console.error('❌ Error cargando tarifas:', error);
+                currentTariffs['2.0TD'] = [];
+            }
+        }
+
+        function parseCSV(text) {
+            const lines = text.trim().split('\n');
+            if (lines.length < 2) return [];
+            
+            const delimiter = lines[0].includes(';') ? ';' : ',';
+            const headers = lines[0].split(delimiter).map(h => h.trim().toLowerCase().replace(/"/g, ''));
+            const data = [];
+
+            for (let i = 1; i < lines.length; i++) {
+                const row = lines[i].trim();
+                if (!row) continue;
+                
+                const values = row.split(delimiter).map(v => v.trim().replace(/"/g, ''));
+                
+                let item = {};
+                headers.forEach((h, idx) => {
+                    let val = values[idx];
+                    if (h.includes('price') || h.includes('potencia') || h === 'descuento') {
+                        val = parseFloat(val?.replace(',', '.') || 0);
+                        if (isNaN(val)) val = 0;
+                    }
+                    item[h] = val;
+                });
+
+                item.isDrk = item.name?.toUpperCase().includes('DRK') || false;
+                
+                if (item.p1_price !== undefined) {
+                    data.push(item);
+                }
+            }
+            return data;
+        }
+
+        // ========================================
+        // ESCÁNER QR
+        // ========================================
+        async function startScanner() {
+            try {
+                // Cargar tarifas si no están cargadas
+                if (currentTariffs['2.0TD'].length === 0) {
+                    await loadTariffs();
+                }
+
+                showScreen('screen-scanner');
+                
+                videoStream = await navigator.mediaDevices.getUserMedia({
+                    video: { facingMode: 'environment' }
+                });
+                
+                const video = document.getElementById('qr-video');
+                video.srcObject = videoStream;
+                video.play();
+
+                scanningInterval = setInterval(scanQRCode, 500);
+                
+                document.getElementById('scan-status').textContent = '📷 Cámara activa - Apunta al código QR';
+                
+            } catch (error) {
+                console.error('Error al acceder a la cámara:', error);
+                alert('No se pudo acceder a la cámara. Por favor, verifica los permisos.');
+                showScreen('screen-inicio');
+            }
+        }
+
+        function scanQRCode() {
+            const video = document.getElementById('qr-video');
+            const canvas = document.createElement('canvas');
+            const context = canvas.getContext('2d');
+
+            if (video.readyState === video.HAVE_ENOUGH_DATA) {
+                canvas.width = video.videoWidth;
+                canvas.height = video.videoHeight;
+                context.drawImage(video, 0, 0, canvas.width, canvas.height);
+                
+                const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+                const code = jsQR(imageData.data, imageData.width, imageData.height);
+
+                if (code) {
+                    console.log('✅ QR detectado:', code.data);
+                    document.getElementById('scan-status').textContent = '✅ ¡QR detectado! Procesando...';
+                    
+                    stopScanner();
+                    processQRData(code.data);
+                }
+            }
+        }
+
+        function stopScanner() {
+            if (scanningInterval) {
+                clearInterval(scanningInterval);
+                scanningInterval = null;
+            }
+            
+            if (videoStream) {
+                videoStream.getTracks().forEach(track => track.stop());
+                videoStream = null;
+            }
+        }
+
+        // ========================================
+        // PROCESAMIENTO DE DATOS QR (CÓDIGO ORIGINAL)
+        // ========================================
+        function processQRData(raw) {
+            showScreen('screen-loading');
+            
+            // Parsear QR
+            const p = {};
+            raw.split('&').forEach(part => {  
+                let [key, ...rest] = part.split('=');
+                let value = rest.join('=');
+                try { 
+                    p[key] = decodeURIComponent(value || '').replace(',', '.'); 
+                } catch (e) { 
+                    p[key] = value || ''; 
+                }
+            });
+            
+            // Extraer datos
+            const data = {
+                cups: p.cups || 'QR SCAN',
+                dias_facturados: 60,
+                importe_total: parseFloat(p.imp || 0),
+                potencia_p1_kw: parseFloat(p.pP1 || 0),
+                potencia_p2_kw: parseFloat(p.pP2 || 0),
+                consumo_punta: parseFloat(p.cfP1 || 0),
+                consumo_llano: parseFloat(p.cfP2 || 0),
+                consumo_valle: parseFloat(p.cfP3 || 0)
+            };
+
+            console.log('📊 Datos extraídos:', data);
+
+            if (data.importe_total <= 0) {
+                alert('QR incompleto. No se detectó el Importe Total.');
+                showScreen('screen-inicio');
+                return;
+            }
+
+            if (currentTariffs['2.0TD'].length === 0) {
+                alert('Las tarifas no están cargadas. Por favor, intenta de nuevo.');
+                showScreen('screen-inicio');
+                return;
+            }
+
+            calculateAndShowResults(data);
+        }
+
+        // ========================================
+        // CÁLCULO Y RESULTADOS
+        // ========================================
+        function calculateAndShowResults(data) {
+            const tariffs = currentTariffs['2.0TD'];
+            const results = tariffs.map(t => calculateTariffCost(t, data));
+            
+            // Mejor tarifa DRK
+            let bestDrk = null;
+            results.forEach(r => {
+                if (r.offer.isDrk && r.offer.name !== 'Tu Tarifa Actual') {
+                    if (!bestDrk || r.totalAnnual < bestDrk.totalAnnual) {
+                        bestDrk = r;
+                    }
+                }
+            });
+
+            if (!bestDrk) {
+                alert('No se encontró una tarifa DRK con ahorro.');
+                showScreen('screen-inicio');
+                return;
+            }
+
+            showResults(bestDrk);
+        }
+
+        function calculateTariffCost(tariff, data) {
+            // Coste de Potencia
+            const p1_cost = data.potencia_p1_kw * data.dias_facturados * (tariff.p_potencia_1 / ANNUAL_DAYS);
+            const p2_cost = data.potencia_p2_kw * data.dias_facturados * (tariff.p_potencia_2 / ANNUAL_DAYS);
+            const subPower = p1_cost + p2_cost;
+
+            // Coste de Energía
+            const e1_cost = data.consumo_punta * tariff.p1_price;
+            const e2_cost = data.consumo_llano * tariff.p2_price;
+            const e3_cost = data.consumo_valle * tariff.p3_price;
+            const subEnergy = e1_cost + e2_cost + e3_cost;
+
+            // Descuento
+            const discountAmount = subEnergy * ((tariff.descuento || 0) / 100);
+            const subEnergyNet = subEnergy - discountAmount;
+
+            // Impuestos
+            const subBase = subPower + subEnergyNet;
+            const costIE = subBase * IE_RATE;
+            const baseImp = subBase + costIE;
+            const costIVA = baseImp * IVA_RATE;
+            const totalPeriod = baseImp + costIVA;
+            
+            // Anualizado
+            const factorAnual = ANNUAL_DAYS / data.dias_facturados;
+            const totalAnnual = totalPeriod * factorAnual;
+            const originalBillAnnual = data.importe_total * factorAnual;
+
+            return {
+                ...data,
+                totalPeriod,
+                totalAnnual,
+                originalBillAnnual,
+                savings: originalBillAnnual - totalAnnual,
+                offer: tariff
+            };
+        }
+
+        function showResults(result) {
+            const savings = result.savings;
+            const currentMonthly = result.originalBillAnnual / 12;
+            const newMonthly = result.totalAnnual / 12;
+
+            // Actualizar valores
+            document.getElementById('tariff-name').textContent = result.offer.name || 'DRK FIJO 4';
+            document.getElementById('annual-savings').textContent = `${savings.toFixed(2)} €`;
+            document.getElementById('period-info').textContent = `Total Periodo (${result.dias_facturados} días): ${(savings * result.dias_facturados / ANNUAL_DAYS).toFixed(2)} €`;
+            
+            document.getElementById('current-annual').textContent = `${result.originalBillAnnual.toFixed(2)} €`;
+            document.getElementById('current-monthly').textContent = `${currentMonthly.toFixed(2)} €`;
+            
+            document.getElementById('new-annual').textContent = `${result.totalAnnual.toFixed(2)} €`;
+            document.getElementById('new-monthly').textContent = `${newMonthly.toFixed(2)} €`;
+            
+            document.getElementById('price-p1').textContent = (result.offer.p_potencia_1 / ANNUAL_DAYS).toFixed(6);
+            document.getElementById('price-p2').textContent = (result.offer.p_potencia_2 / ANNUAL_DAYS).toFixed(6);
+            document.getElementById('price-e1').textContent = result.offer.p1_price.toFixed(6);
+            document.getElementById('price-e2').textContent = result.offer.p2_price.toFixed(6);
+            document.getElementById('price-e3').textContent = result.offer.p3_price.toFixed(6);
+            
+            showScreen('screen-results');
+        }
+
+        // ========================================
+        // INICIALIZACIÓN
+        // ========================================
+        window.addEventListener('load', () => {
+            console.log('✅ Comparador DRK cargado');
+            console.log('📱 Listo para escanear facturas');
+            
+            // Pre-cargar tarifas
+            loadTariffs();
+        });
+    </script>
 
 </body>
 </html>
