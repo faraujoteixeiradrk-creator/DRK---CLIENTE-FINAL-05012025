@@ -395,34 +395,74 @@
             <input type="file" id="camera-capture-input" accept="image/*" capture="environment" class="hidden">
             <input type="file" id="file-upload-input" accept=".pdf,.jpg,.jpeg,.png,image/*,application/pdf" class="hidden">
             
-            <!-- Header Extractor Inteligente -->
+            <!-- Header DRK Power - Extractor Inteligente -->
             <div class="w-full max-w-5xl mb-12 text-center px-4">
-                <div class="flex items-center justify-center gap-4 mb-6">
-                    <svg class="w-16 h-16 md:w-20 md:h-20 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
-                    </svg>
-                    <h1 class="text-5xl md:text-6xl lg:text-7xl font-black text-blue-400">Extractor Inteligente</h1>
+                <div class="flex flex-col items-center justify-center gap-4 mb-6">
+                    <!-- Logo DRK arriba -->
+                    <div class="flex items-center gap-3">
+                        <!-- Logo circular DRK -->
+                        <svg class="w-16 h-16 md:w-20 md:h-20" viewBox="0 0 100 100" fill="none">
+                            <!-- Círculo con gradientes de colores -->
+                            <defs>
+                                <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
+                                    <stop offset="0%" style="stop-color:#E53935;stop-opacity:1" />
+                                    <stop offset="25%" style="stop-color:#FF8C00;stop-opacity:1" />
+                                </linearGradient>
+                                <linearGradient id="grad2" x1="0%" y1="0%" x2="0%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#FF8C00;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:rgb(53,168,223);stop-opacity:1" />
+                                </linearGradient>
+                                <linearGradient id="grad3" x1="100%" y1="0%" x2="0%" y2="0%">
+                                    <stop offset="0%" style="stop-color:rgb(53,168,223);stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#4CAF50;stop-opacity:1" />
+                                </linearGradient>
+                                <linearGradient id="grad4" x1="0%" y1="100%" x2="0%" y2="0%">
+                                    <stop offset="0%" style="stop-color:#4CAF50;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#E53935;stop-opacity:1" />
+                                </linearGradient>
+                            </defs>
+                            <!-- Arco superior (rojo a naranja) -->
+                            <path d="M 50 5 A 45 45 0 0 1 95 50" stroke="url(#grad1)" stroke-width="6" fill="none" stroke-linecap="round"/>
+                            <!-- Arco derecho (naranja a azul) -->
+                            <path d="M 95 50 A 45 45 0 0 1 50 95" stroke="url(#grad2)" stroke-width="6" fill="none" stroke-linecap="round"/>
+                            <!-- Arco inferior (azul a verde) -->
+                            <path d="M 50 95 A 45 45 0 0 1 5 50" stroke="url(#grad3)" stroke-width="6" fill="none" stroke-linecap="round"/>
+                            <!-- Arco izquierdo (verde a rojo) -->
+                            <path d="M 5 50 A 45 45 0 0 1 50 5" stroke="url(#grad4)" stroke-width="6" fill="none" stroke-linecap="round"/>
+                        </svg>
+                        
+                        <!-- Texto DRK -->
+                        <h1 class="text-6xl md:text-7xl lg:text-8xl font-black tracking-tight" style="color: rgb(53,168,223);">DRK</h1>
+                    </div>
+                    
+                    <!-- POWER abajo -->
+                    <div class="bg-slate-800 px-6 md:px-8 py-2 md:py-3 rounded-lg">
+                        <h2 class="text-2xl md:text-3xl lg:text-4xl font-black text-white tracking-wider">POWER</h2>
+                    </div>
                 </div>
-                <p class="text-slate-400 text-base md:text-lg uppercase tracking-widest font-mono">
-                    ANALIZADOR DE FACTURAS ELÉCTRICAS CNMC
+                <p class="text-slate-300 text-sm md:text-base lg:text-lg uppercase tracking-widest font-mono leading-relaxed">
+                    SOLO PARA FACTURAS PDF DIRECTAS<br class="md:hidden">
+                    <span class="hidden md:inline">DE LA COMERCIALIZADORA</span>
+                    <span class="md:hidden">DE LA COMERCIALIZADORA</span>
+                    <span class="block mt-2 text-xs md:text-sm" style="color: rgb(53,168,223);">(MULTIDIOMAS)</span>
                 </p>
             </div>
             
             <!-- Selector de idiomas -->
             <div class="w-full max-w-5xl mb-8 flex flex-wrap justify-center gap-3 px-4">
-                <button onclick="if(window.LANG) window.LANG.change('es')" class="px-5 py-2.5 rounded-lg bg-slate-700/50 border-2 border-slate-600 hover:border-blue-400 hover:bg-slate-700 text-white font-semibold transition text-sm">
+                <button onclick="if(window.LANG) window.LANG.change('es')" class="px-5 py-2.5 rounded-lg bg-slate-700/50 border-2 border-slate-600 hover:bg-slate-700 text-white font-semibold transition text-sm" style="border-color: rgb(53,168,223);">
                     🇪🇸 ES
                 </button>
-                <button onclick="if(window.LANG) window.LANG.change('en')" class="px-5 py-2.5 rounded-lg bg-slate-700/50 border-2 border-slate-600 hover:border-blue-400 hover:bg-slate-700 text-white font-semibold transition text-sm">
+                <button onclick="if(window.LANG) window.LANG.change('en')" class="px-5 py-2.5 rounded-lg bg-slate-700/50 border-2 border-slate-600 hover:bg-slate-700 text-white font-semibold transition text-sm" style="border-color: rgb(53,168,223);">
                     🇬🇧 EN
                 </button>
-                <button onclick="if(window.LANG) window.LANG.change('zh')" class="px-5 py-2.5 rounded-lg bg-slate-700/50 border-2 border-slate-600 hover:border-blue-400 hover:bg-slate-700 text-white font-semibold transition text-sm">
+                <button onclick="if(window.LANG) window.LANG.change('zh')" class="px-5 py-2.5 rounded-lg bg-slate-700/50 border-2 border-slate-600 hover:bg-slate-700 text-white font-semibold transition text-sm" style="border-color: rgb(53,168,223);">
                     🇨🇳 ZH
                 </button>
-                <button onclick="if(window.LANG) window.LANG.change('fr')" class="px-5 py-2.5 rounded-lg bg-slate-700/50 border-2 border-slate-600 hover:border-blue-400 hover:bg-slate-700 text-white font-semibold transition text-sm">
+                <button onclick="if(window.LANG) window.LANG.change('fr')" class="px-5 py-2.5 rounded-lg bg-slate-700/50 border-2 border-slate-600 hover:bg-slate-700 text-white font-semibold transition text-sm" style="border-color: rgb(53,168,223);">
                     🇫🇷 FR
                 </button>
-                <button onclick="if(window.LANG) window.LANG.change('de')" class="px-5 py-2.5 rounded-lg bg-slate-700/50 border-2 border-slate-600 hover:border-blue-400 hover:bg-slate-700 text-white font-semibold transition text-sm">
+                <button onclick="if(window.LANG) window.LANG.change('de')" class="px-5 py-2.5 rounded-lg bg-slate-700/50 border-2 border-slate-600 hover:bg-slate-700 text-white font-semibold transition text-sm" style="border-color: rgb(53,168,223);">
                     🇩🇪 DE
                 </button>
             </div>
@@ -444,7 +484,7 @@
                     
                     <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Arrastra PDF o Foto de Factura</h2>
                     <p class="text-slate-300 text-base md:text-lg mb-2">
-                        Aceptamos <span class="text-blue-400 font-bold">PDF, JPG</span> o <span class="text-blue-400 font-bold">PNG</span>. Buscamos el código QR o el enlace
+                        Aceptamos <span class="font-bold" style="color: rgb(53,168,223);">PDF, JPG</span> o <span class="font-bold" style="color: rgb(53,168,223);">PNG</span>. Buscamos el código QR o el enlace
                     </p>
                     <p class="text-slate-300 text-base md:text-lg mb-4">
                         oculto para extraer los datos.
@@ -5665,14 +5705,14 @@
                     <div class="space-y-4">
                         <!-- Información Principal -->
                         <div class="bg-gradient-to-r from-blue-50 to-cyan-50 p-4 rounded-lg border-2 border-blue-200">
-                            <p class="text-xs font-bold text-blue-900 uppercase mb-2">📋 Información del Suministro</p>
+                            <p class="text-xs font-bold text-blue-900 uppercase mb-2">${tr('Información del Suministro')}</p>
                             <div class="grid grid-cols-1 gap-2">
                                 <div class="flex justify-between items-center">
                                     <span class="text-xs text-slate-600">CUPS:</span>
                                     <span class="font-mono font-bold text-xs text-slate-900">${res.cups || 'N/A'}</span>
                                 </div>
                                 <div class="flex justify-between items-center">
-                                    <span class="text-xs text-slate-600">Importe Total:</span>
+                                    <span class="text-xs text-slate-600">${tr('Importe Total:')}</span>
                                     <span class="font-bold text-lg ${brand.PRIMARY_TEXT}">${num(res.importe_total || 0, 2)} €</span>
                                 </div>
                             </div>
@@ -5681,11 +5721,11 @@
                         <!-- Periodo de Facturación -->
                         <div class="grid grid-cols-2 gap-4">
                             <div class="bg-white p-3 rounded-lg border border-slate-200">
-                                <p class="text-xs text-slate-500 mb-1">📅 Periodo</p>
+                                <p class="text-xs text-slate-500 mb-1">${tr('Periodo')}</p>
                                 <p class="font-bold text-slate-900">${res.dias_facturados} ${tr('días')}</p>
                             </div>
                             <div class="bg-white p-3 rounded-lg border border-slate-200">
-                                <p class="text-xs text-slate-500 mb-1">📆 Fechas</p>
+                                <p class="text-xs text-slate-500 mb-1">${tr('Fechas')}</p>
                                 <p class="font-bold text-slate-900 text-xs">${res.fechas}</p>
                             </div>
                         </div>
@@ -5720,15 +5760,15 @@
                             </div>
                             ${res.potencia_max_p1 || res.potencia_max_p2 ? `
                                 <div class="mt-4 p-3 bg-amber-50 rounded-lg border border-amber-300">
-                                    <p class="text-xs font-bold text-amber-900 mb-2">⚡ Picos Máximos Registrados:</p>
-                                    ${res.potencia_max_p1 ? `<div class="flex justify-between text-xs"><span>P1 (Punta):</span><span class="font-bold">${num(res.potencia_max_p1, 3)} kW</span></div>` : ''}
-                                    ${res.potencia_max_p2 ? `<div class="flex justify-between text-xs"><span>P2 (Valle):</span><span class="font-bold">${num(res.potencia_max_p2, 3)} kW</span></div>` : ''}
+                                    <p class="text-xs font-bold text-amber-900 mb-2">${tr('Picos Máximos Registrados:')}</p>
+                                    ${res.potencia_max_p1 ? `<div class="flex justify-between text-xs"><span>${tr('P1 (Punta):')}</span><span class="font-bold">${num(res.potencia_max_p1, 3)} kW</span></div>` : ''}
+                                    ${res.potencia_max_p2 ? `<div class="flex justify-between text-xs"><span>${tr('P2 (Valle):')}</span><span class="font-bold">${num(res.potencia_max_p2, 3)} kW</span></div>` : ''}
                                     ${res.potencia_p1_kw && res.potencia_max_p1 ? `
                                         <div class="mt-2 pt-2 border-t border-amber-200">
                                             <p class="text-xs text-amber-800">
-                                                <span class="font-bold">Aprovechamiento:</span> ${num((res.potencia_max_p1 / res.potencia_p1_kw) * 100, 0)}% de la potencia contratada
+                                                <span class="font-bold">${tr('Aprovechamiento:')}</span> ${num((res.potencia_max_p1 / res.potencia_p1_kw) * 100, 0)}% ${tr('de la potencia contratada')}
                                             </p>
-                                            ${((res.potencia_max_p1 / res.potencia_p1_kw) * 100) < 50 ? `<p class="text-xs text-red-600 mt-1">⚠️ Estás pagando por mucha más potencia de la que usas</p>` : ''}
+                                            ${((res.potencia_max_p1 / res.potencia_p1_kw) * 100) < 50 ? `<p class="text-xs text-red-600 mt-1">${tr('Estás pagando por mucha más potencia de la que usas')}</p>` : ''}
                                         </div>
                                     ` : ''}
                                 </div>
@@ -5742,22 +5782,22 @@
                                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
                                     </svg>
-                                    💰 Desglose de Costes
+                                    ${tr('Desglose de Costes')}
                                 </p>
                                 <div class="space-y-2">
-                                    ${res.coste_potencia ? `<div class="flex justify-between items-center bg-white p-2 rounded"><span class="text-sm text-slate-700">Término fijo (Potencia)</span><span class="font-bold text-purple-700">${num(res.coste_potencia, 2)} €</span></div>` : ''}
-                                    ${res.coste_energia ? `<div class="flex justify-between items-center bg-white p-2 rounded"><span class="text-sm text-slate-700">Término variable (Energía)</span><span class="font-bold text-purple-700">${num(res.coste_energia, 2)} €</span></div>` : ''}
-                                    ${res.otros_costes ? `<div class="flex justify-between items-center bg-white p-2 rounded"><span class="text-sm text-slate-700">Otros (Contador, etc.)</span><span class="font-bold text-purple-700">${num(res.otros_costes, 2)} €</span></div>` : ''}
+                                    ${res.coste_potencia ? `<div class="flex justify-between items-center bg-white p-2 rounded"><span class="text-sm text-slate-700">${tr('Término fijo (Potencia)')}</span><span class="font-bold text-purple-700">${num(res.coste_potencia, 2)} €</span></div>` : ''}
+                                    ${res.coste_energia ? `<div class="flex justify-between items-center bg-white p-2 rounded"><span class="text-sm text-slate-700">${tr('Término variable (Energía)')}</span><span class="font-bold text-purple-700">${num(res.coste_energia, 2)} €</span></div>` : ''}
+                                    ${res.otros_costes ? `<div class="flex justify-between items-center bg-white p-2 rounded"><span class="text-sm text-slate-700">${tr('Otros (Contador, etc.)')}</span><span class="font-bold text-purple-700">${num(res.otros_costes, 2)} €</span></div>` : ''}
                                     ${res.coste_potencia && res.coste_energia ? `
                                         <div class="flex justify-between items-center bg-purple-100 p-2 rounded border-t-2 border-purple-300 mt-2">
-                                            <span class="text-sm font-bold text-purple-900">Subtotal (sin impuestos)</span>
+                                            <span class="text-sm font-bold text-purple-900">${tr('Subtotal (sin impuestos)')}</span>
                                             <span class="font-bold text-lg text-purple-900">${num((res.coste_potencia || 0) + (res.coste_energia || 0) + (res.otros_costes || 0), 2)} €</span>
                                         </div>
                                         <div class="text-xs text-slate-600 mt-2 bg-white p-2 rounded">
-                                            <p class="mb-1">El resto hasta <strong>${num(res.importe_total, 2)} €</strong> corresponde a:</p>
+                                            <p class="mb-1">${tr('El resto hasta')} <strong>${num(res.importe_total, 2)} €</strong> ${tr('corresponde a:')}</p>
                                             <ul class="list-disc list-inside pl-2 space-y-1">
-                                                <li>Impuesto Eléctrico (5.11%)</li>
-                                                <li>IVA (21%)</li>
+                                                <li>${tr('Impuesto Eléctrico (5.11%)')}</li>
+                                                <li>${tr('IVA (21%)')}</li>
                                             </ul>
                                         </div>
                                     ` : ''}
@@ -5772,14 +5812,14 @@
                                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
                                     </svg>
-                                    📊 Histórico Acumulado (Ciclo Anual)
+                                    ${tr('Histórico Acumulado (Ciclo Anual)')}
                                 </p>
                                 <div class="space-y-2">
-                                    ${res.consumo_anual_p1 ? `<div class="flex justify-between text-sm"><span class="text-slate-700">P1 (Punta):</span><span class="font-bold text-indigo-700">${num(res.consumo_anual_p1, 0)} kWh</span></div>` : ''}
-                                    ${res.consumo_anual_p2 ? `<div class="flex justify-between text-sm"><span class="text-slate-700">P2 (Llano):</span><span class="font-bold text-indigo-700">${num(res.consumo_anual_p2, 0)} kWh</span></div>` : ''}
-                                    ${res.consumo_anual_p3 ? `<div class="flex justify-between text-sm"><span class="text-slate-700">P3 (Valle):</span><span class="font-bold text-indigo-700">${num(res.consumo_anual_p3, 0)} kWh</span></div>` : ''}
+                                    ${res.consumo_anual_p1 ? `<div class="flex justify-between text-sm"><span class="text-slate-700">${tr('P1 (Punta):')}</span><span class="font-bold text-indigo-700">${num(res.consumo_anual_p1, 0)} kWh</span></div>` : ''}
+                                    ${res.consumo_anual_p2 ? `<div class="flex justify-between text-sm"><span class="text-slate-700">${tr('P2 (Llano):')}</span><span class="font-bold text-indigo-700">${num(res.consumo_anual_p2, 0)} kWh</span></div>` : ''}
+                                    ${res.consumo_anual_p3 ? `<div class="flex justify-between text-sm"><span class="text-slate-700">${tr('P3 (Valle):')}</span><span class="font-bold text-indigo-700">${num(res.consumo_anual_p3, 0)} kWh</span></div>` : ''}
                                     <div class="flex justify-between bg-indigo-100 p-2 rounded border-t-2 border-indigo-300 mt-2">
-                                        <span class="text-sm font-bold text-indigo-900">Total Acumulado:</span>
+                                        <span class="text-sm font-bold text-indigo-900">${tr('Total Acumulado:')}</span>
                                         <span class="font-bold text-lg text-indigo-900">${num((res.consumo_anual_p1 || 0) + (res.consumo_anual_p2 || 0) + (res.consumo_anual_p3 || 0), 0)} kWh</span>
                                     </div>
                                 </div>
@@ -5789,12 +5829,12 @@
                         <!-- Información Adicional -->
                         ${res.fecha_factura || res.comercializadora || res.fecha_fin_contrato ? `
                             <div class="bg-slate-50 p-4 rounded-lg border border-slate-200">
-                                <p class="font-bold text-slate-800 mb-3 text-sm">ℹ️ Información Adicional</p>
+                                <p class="font-bold text-slate-800 mb-3 text-sm">${tr('Información Adicional')}</p>
                                 <div class="grid grid-cols-1 gap-2 text-xs">
-                                    ${res.fecha_factura ? `<div class="flex justify-between"><span class="text-slate-600">Fecha de factura:</span><span class="font-mono font-bold">${res.fecha_factura}</span></div>` : ''}
-                                    ${res.comercializadora ? `<div class="flex justify-between"><span class="text-slate-600">Comercializadora:</span><span class="font-bold">${res.comercializadora}</span></div>` : ''}
-                                    ${res.fecha_fin_contrato ? `<div class="flex justify-between"><span class="text-slate-600">Fin de contrato:</span><span class="font-mono font-bold">${res.fecha_fin_contrato}</span></div>` : ''}
-                                    ${res.tipo_contrato ? `<div class="flex justify-between"><span class="text-slate-600">Tipo de contrato:</span><span class="font-bold">${res.tipo_contrato}</span></div>` : ''}
+                                    ${res.fecha_factura ? `<div class="flex justify-between"><span class="text-slate-600">${tr('Fecha de factura:')}</span><span class="font-mono font-bold">${res.fecha_factura}</span></div>` : ''}
+                                    ${res.comercializadora ? `<div class="flex justify-between"><span class="text-slate-600">${tr('Comercializadora:')}</span><span class="font-bold">${res.comercializadora}</span></div>` : ''}
+                                    ${res.fecha_fin_contrato ? `<div class="flex justify-between"><span class="text-slate-600">${tr('Fin de contrato:')}</span><span class="font-mono font-bold">${res.fecha_fin_contrato}</span></div>` : ''}
+                                    ${res.tipo_contrato ? `<div class="flex justify-between"><span class="text-slate-600">${tr('Tipo de contrato:')}</span><span class="font-bold">${res.tipo_contrato}</span></div>` : ''}
                                 </div>
                             </div>
                         ` : ''}
@@ -17229,10 +17269,10 @@ Destinatarios: F.araujo@drk.es, rguerra@drk.es, l.grande@drk.es
             addProcessingLog(`✓ PDF cargado: ${pdf.numPages} página(s)`, 'success');
             updateProcessingProgress(15);
             
-            // ========== ESTRATEGIA 1: Enlaces Digitales Incrustados ==========
-            updateProcessingStatus('Buscando enlaces digitales incrustados...');
+            // ========== ESTRATEGIA 1: Enlaces Digitales Incrustados + TOOLTIPS ==========
+            updateProcessingStatus('Buscando enlaces digitales incrustados y tooltips...');
             updateStrategyStatus(1, 'Analizando...', 'yellow');
-            addProcessingLog('🔍 ESTRATEGIA 1: Enlaces incrustados', 'working');
+            addProcessingLog('🔍 ESTRATEGIA 1: Enlaces incrustados + Tooltips', 'working');
             updateProcessingProgress(20);
             
             for (let i = 1; i <= pdf.numPages; i++) {
@@ -17242,10 +17282,28 @@ Destinatarios: F.araujo@drk.es, rguerra@drk.es, l.grande@drk.es
                 addProcessingLog(`  Página ${i}/${pdf.numPages}: ${annotations.length} anotación(es)`, 'info');
                 
                 for (const ann of annotations) {
+                    // Check URL (Link normal)
                     if (ann.url && ann.url.includes('comparador.cnmc.gob.es')) {
                         addProcessingLog(`✓ ¡Enlace encontrado en página ${i}!`, 'success');
                         
                         const validUrl = processFoundUrl(ann.url, 'Enlace Digital', i);
+                        if (validUrl) {
+                            updateStrategyStatus(1, '¡Éxito!', 'green');
+                            updateProcessingProgress(100);
+                            
+                            setTimeout(() => {
+                                hideProcessingModal();
+                                handleQRRead(validUrl);
+                            }, 800);
+                            return;
+                        }
+                    }
+                    // NUEVO: Check Tooltips/Contents (Contenido oculto al pasar ratón)
+                    // A veces el contenido está en 'contents', otras veces en 'richContents'
+                    if (ann.contents && isCNMCData(ann.contents)) {
+                        addProcessingLog(`✓ ¡Datos encontrados en Tooltip (MouseOver) en página ${i}!`, 'success');
+                        
+                        const validUrl = processFoundUrl(ann.contents, 'Tooltip Oculto', i);
                         if (validUrl) {
                             updateStrategyStatus(1, '¡Éxito!', 'green');
                             updateProcessingProgress(100);
@@ -17332,6 +17390,137 @@ Destinatarios: F.araujo@drk.es, rguerra@drk.es, l.grande@drk.es
             updateStrategyStatus(2, 'Sin resultados', 'slate');
             addProcessingLog('⊘ No se encontró texto de URL CNMC válido', 'info');
             updateProcessingProgress(50);
+            
+            // ========== ESTRATEGIA 2.5: MINERÍA DE IMÁGENES NATIVAS (OPTIMIZADA) ==========
+            updateProcessingStatus('Iniciando Minería de Imágenes Nativa...');
+            addProcessingLog('🔍 ESTRATEGIA 2.5: Minería de Imágenes del PDF', 'working');
+            updateProcessingProgress(52);
+            
+            // Flag para detectar si encontramos algo y salir rápido
+            let foundInMining = false;
+            
+            for (let i = 1; i <= pdf.numPages && !foundInMining; i++) {
+                const page = await pdf.getPage(i);
+                try {
+                    const ops = await page.getOperatorList();
+                    
+                    addProcessingLog(`  Página ${i}: Buscando imágenes...`, 'working');
+                    
+                    let imagesProcessed = 0;
+                    const maxImagesPerPage = 10; // Límite para evitar PDFs con muchas imágenes
+                    
+                    for (let j = 0; j < ops.fnArray.length && imagesProcessed < maxImagesPerPage && !foundInMining; j++) {
+                        if (ops.fnArray[j] === pdfjsLib.OPS.paintImageXObject) {
+                            const imgName = ops.argsArray[j][0];
+                            
+                            try {
+                                // Timeout de 2 segundos por imagen
+                                const imagePromise = new Promise((resolve, reject) => {
+                                    const timeout = setTimeout(() => reject(new Error('timeout')), 2000);
+                                    
+                                    try {
+                                        page.objs.get(imgName, (imgData) => {
+                                            clearTimeout(timeout);
+                                            resolve(imgData);
+                                        });
+                                    } catch(e) {
+                                        clearTimeout(timeout);
+                                        reject(e);
+                                    }
+                                });
+                                
+                                const imgData = await imagePromise;
+                                
+                                if (imgData && imgData.width > 50 && imgData.height > 50) {
+                                    imagesProcessed++;
+                                    
+                                    // Renderizar solo si tiene tamaño razonable para un QR
+                                    if (imgData.width < 2000 && imgData.height < 2000) {
+                                        const tempCanvas = document.createElement('canvas');
+                                        tempCanvas.width = imgData.width;
+                                        tempCanvas.height = imgData.height;
+                                        const ctx = tempCanvas.getContext('2d');
+                                        
+                                        const imageDataObj = ctx.createImageData(imgData.width, imgData.height);
+                                        
+                                        // Manejar diferentes tipos de imagen
+                                        if (imgData.data) {
+                                            if (imgData.kind === 1 || imgData.kind === 2) { // RGB o RGBA
+                                                for(let k=0; k<Math.min(imgData.data.length, imageDataObj.data.length); k++) {
+                                                    imageDataObj.data[k] = imgData.data[k];
+                                                }
+                                            } else if (imgData.data.length === imgData.width * imgData.height) { // Grayscale
+                                                for(let k=0, p=0; k<imgData.data.length && p<imageDataObj.data.length; k++, p+=4) {
+                                                    const val = imgData.data[k];
+                                                    imageDataObj.data[p] = val;
+                                                    imageDataObj.data[p+1] = val;
+                                                    imageDataObj.data[p+2] = val;
+                                                    imageDataObj.data[p+3] = 255;
+                                                }
+                                            }
+                                            
+                                            ctx.putImageData(imageDataObj, 0, 0);
+                                            
+                                            // Validar que los datos sean correctos antes de escanear
+                                            const imgDataToScan = ctx.getImageData(0, 0, imgData.width, imgData.height);
+                                            
+                                            // Verificar integridad de los datos
+                                            if (imgDataToScan && imgDataToScan.data && 
+                                                imgDataToScan.data.length === imgData.width * imgData.height * 4) {
+                                                
+                                                try {
+                                                    const code = jsQR(imgDataToScan.data, imgData.width, imgData.height, { 
+                                                        inversionAttempts: "dontInvert" 
+                                                    });
+                                                    
+                                                    if (code && isCNMCData(code.data)) {
+                                                        addProcessingLog(`✓ ¡QR detectado por Minería en página ${i}!`, 'success');
+                                                        
+                                                        const validUrl = processFoundUrl(code.data, 'Minería de Imágenes', i);
+                                                        if (validUrl) {
+                                                            updateStrategyStatus(2, '¡Éxito Minería!', 'green');
+                                                            updateProcessingProgress(100);
+                                                            foundInMining = true;
+                                                            
+                                                            setTimeout(() => {
+                                                                hideProcessingModal();
+                                                                handleQRRead(validUrl);
+                                                            }, 800);
+                                                            return;
+                                                        }
+                                                    }
+                                                } catch(qrError) {
+                                                    console.warn('Error escaneando QR en imagen:', qrError);
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            } catch(imgError) {
+                                // Ignorar errores de imágenes individuales
+                                if (imgError.message !== 'timeout') {
+                                    console.log(`Imagen ${j} omitida:`, imgError.message);
+                                }
+                            }
+                        }
+                    }
+                    
+                    if (imagesProcessed > 0) {
+                        addProcessingLog(`  Página ${i}: ${imagesProcessed} imagen(es) analizadas`, 'info');
+                    }
+                } catch(e) { 
+                    console.log("Error minería página " + i + ":", e);
+                    addProcessingLog(`  Página ${i}: Error en minería (omitida)`, 'info');
+                }
+                
+                // Pequeña pausa entre páginas
+                await new Promise(r => setTimeout(r, 50));
+            }
+            
+            if (!foundInMining) {
+                addProcessingLog('⊘ No se encontró QR en imágenes nativas', 'info');
+                updateProcessingProgress(54);
+            }
             
             // ========== ESTRATEGIA 3: Búsqueda Visual QR (Microscopio Digital) ==========
             updateProcessingStatus('Iniciando escaneo visual de QR...');
@@ -17437,6 +17626,25 @@ Destinatarios: F.araujo@drk.es, rguerra@drk.es, l.grande@drk.es
                         return;
                     }
                 }
+                
+                // NUEVO: Intento 6: Grid 3x3 Solapado (Francotirador)
+                addProcessingLog(`  Página ${i}: Escaneo Zonal 3x3 (Último recurso)`, 'working');
+                updateProcessingProgress(progressBase + 12);
+                qrUrl = await scanPageQuadrants(page, 4.0);
+                if (qrUrl) {
+                    const validUrl = processFoundUrl(qrUrl, 'Grid 3x3 Solapado', i);
+                    if (validUrl) {
+                        addProcessingLog(`✓ ¡QR detectado por Grid 3x3 en página ${i}!`, 'success');
+                        updateStrategyStatus(3, '¡Éxito Grid 3x3!', 'green');
+                        updateProcessingProgress(100);
+                        
+                        setTimeout(() => {
+                            hideProcessingModal();
+                            handleQRRead(validUrl);
+                        }, 800);
+                        return;
+                    }
+                }
             }
             
             updateStrategyStatus(3, 'Sin resultados', 'red');
@@ -17475,14 +17683,14 @@ Destinatarios: F.araujo@drk.es, rguerra@drk.es, l.grande@drk.es
             addProcessingLog(`✓ Imagen cargada: ${canvas.width}x${canvas.height}`, 'success');
             updateProcessingProgress(25);
             
-            // Intento 1: Escaneo directo
-            addProcessingLog('🔍 Intento 1: Escaneo directo', 'working');
-            updateProcessingProgress(30);
-            let qrUrl = attemptQRScanFromCanvas(ctx, canvas.width, canvas.height, false);
+            // MEJORADO: Usar performDeepScan directamente que prueba múltiples técnicas
+            addProcessingLog('🔍 Aplicando Deep Scan (múltiples umbrales + inversión)', 'working');
+            updateProcessingProgress(35);
+            let qrUrl = performDeepScan(ctx, canvas.width, canvas.height);
             if (qrUrl) {
-                const validUrl = processFoundUrl(qrUrl, 'Modo Directo', 1);
+                const validUrl = processFoundUrl(qrUrl, 'Deep Scan en Imagen', 1);
                 if (validUrl) {
-                    addProcessingLog('✓ ¡QR detectado en modo directo!', 'success');
+                    addProcessingLog('✓ ¡QR detectado con Deep Scan!', 'success');
                     updateStrategyStatus(3, '¡Éxito!', 'green');
                     updateProcessingProgress(100);
                     
@@ -17494,41 +17702,46 @@ Destinatarios: F.araujo@drk.es, rguerra@drk.es, l.grande@drk.es
                 }
             }
             
-            // Intento 2: Con filtro estándar
-            addProcessingLog('🔍 Intento 2: Filtro de contraste estándar', 'working');
-            updateProcessingProgress(50);
-            qrUrl = attemptQRScanFromCanvas(ctx, canvas.width, canvas.height, true, 160);
-            if (qrUrl) {
-                const validUrl = processFoundUrl(qrUrl, 'Filtro Estándar', 1);
-                if (validUrl) {
-                    addProcessingLog('✓ ¡QR detectado con filtro estándar!', 'success');
-                    updateStrategyStatus(3, '¡Éxito!', 'green');
-                    updateProcessingProgress(100);
+            // NUEVO: Intento con Grid 3x3 si la imagen es grande
+            if (canvas.width > 800 && canvas.height > 800) {
+                addProcessingLog('🔍 Imagen grande detectada - Aplicando Grid 3x3', 'working');
+                updateProcessingProgress(60);
+                
+                const w = canvas.width, h = canvas.height;
+                const zones = [
+                    { x: 0, y: 0, w: w/2, h: h/2 },
+                    { x: w/4, y: 0, w: w/2, h: h/2 },
+                    { x: w/2, y: 0, w: w/2, h: h/2 },
+                    { x: 0, y: h/4, w: w/2, h: h/2 },
+                    { x: w/4, y: h/4, w: w/2, h: h/2 },
+                    { x: w/2, y: h/4, w: w/2, h: h/2 },
+                    { x: 0, y: h/2, w: w/2, h: h/2 },
+                    { x: w/4, y: h/2, w: w/2, h: h/2 },
+                    { x: w/2, y: h/2, w: w/2, h: h/2 }
+                ];
+                
+                for (let z of zones) {
+                    const tempC = document.createElement('canvas');
+                    tempC.width = z.w;
+                    tempC.height = z.h;
+                    const tempCtx = tempC.getContext('2d');
+                    tempCtx.drawImage(canvas, z.x, z.y, z.w, z.h, 0, 0, z.w, z.h);
                     
-                    setTimeout(() => {
-                        hideProcessingModal();
-                        handleQRRead(validUrl);
-                    }, 800);
-                    return;
-                }
-            }
-            
-            // Intento 3: Con filtro oscuro
-            addProcessingLog('🔍 Intento 3: Filtro oscuro', 'working');
-            updateProcessingProgress(75);
-            qrUrl = attemptQRScanFromCanvas(ctx, canvas.width, canvas.height, true, 100);
-            if (qrUrl) {
-                const validUrl = processFoundUrl(qrUrl, 'Filtro Oscuro', 1);
-                if (validUrl) {
-                    addProcessingLog('✓ ¡QR detectado con filtro oscuro!', 'success');
-                    updateStrategyStatus(3, '¡Éxito!', 'green');
-                    updateProcessingProgress(100);
-                    
-                    setTimeout(() => {
-                        hideProcessingModal();
-                        handleQRRead(validUrl);
-                    }, 800);
-                    return;
+                    const zoneData = performDeepScan(tempCtx, z.w, z.h);
+                    if (zoneData) {
+                        const validUrl = processFoundUrl(zoneData, 'Grid 3x3 en Imagen', 1);
+                        if (validUrl) {
+                            addProcessingLog('✓ ¡QR detectado en zona recortada!', 'success');
+                            updateStrategyStatus(3, '¡Éxito Grid 3x3!', 'green');
+                            updateProcessingProgress(100);
+                            
+                            setTimeout(() => {
+                                hideProcessingModal();
+                                handleQRRead(validUrl);
+                            }, 800);
+                            return;
+                        }
+                    }
                 }
             }
             
@@ -17565,31 +17778,200 @@ Destinatarios: F.araujo@drk.es, rguerra@drk.es, l.grande@drk.es
         
         // Intentar escanear QR desde canvas
         function attemptQRScanFromCanvas(context, width, height, enhanceContrast = false, threshold = 180) {
-            const imageData = context.getImageData(0, 0, width, height);
-            let data = imageData.data;
-            
-            // Aplicar filtro de contraste si se solicita
-            if (enhanceContrast) {
-                const newData = new Uint8ClampedArray(data);
-                for (let i = 0; i < newData.length; i += 4) {
-                    const luma = 0.299 * newData[i] + 0.587 * newData[i + 1] + 0.114 * newData[i + 2];
-                    const val = luma < threshold ? 0 : 255;
-                    newData[i] = val;
-                    newData[i + 1] = val;
-                    newData[i + 2] = val;
+            try {
+                // Validaciones de seguridad
+                if (!context || !width || !height || width <= 0 || height <= 0) {
+                    console.warn('attemptQRScanFromCanvas: Parámetros inválidos');
+                    return null;
                 }
-                data = newData;
-            }
-            
-            const code = jsQR(data, width, height, {
-                inversionAttempts: "dontInvert",
-            });
-            
-            if (code && code.data.includes('comparador.cnmc.gob.es')) {
-                return code.data;
+                
+                if (width > 10000 || height > 10000) {
+                    console.warn('attemptQRScanFromCanvas: Imagen demasiado grande');
+                    return null;
+                }
+                
+                const imageData = context.getImageData(0, 0, width, height);
+                let data = imageData.data;
+                
+                // Verificar que los datos sean válidos
+                if (!data || data.length !== width * height * 4) {
+                    console.warn('attemptQRScanFromCanvas: Datos inválidos');
+                    return null;
+                }
+                
+                // Aplicar filtro de contraste si se solicita
+                if (enhanceContrast) {
+                    const newData = new Uint8ClampedArray(data);
+                    for (let i = 0; i < newData.length; i += 4) {
+                        const luma = 0.299 * newData[i] + 0.587 * newData[i + 1] + 0.114 * newData[i + 2];
+                        const val = luma < threshold ? 0 : 255;
+                        newData[i] = val;
+                        newData[i + 1] = val;
+                        newData[i + 2] = val;
+                    }
+                    data = newData;
+                }
+                
+                const code = jsQR(data, width, height, {
+                    inversionAttempts: "dontInvert",
+                });
+                
+                if (code && code.data.includes('comparador.cnmc.gob.es')) {
+                    return code.data;
+                }
+            } catch(e) {
+                console.error('Error en attemptQRScanFromCanvas:', e);
             }
             return null;
         }
+        
+        // ========== TÉCNICAS AVANZADAS DE DEEP SCAN (NUEVAS) ==========
+        
+        // Función Maestra de Escaneo Profundo (Deep Scan)
+        // Prueba inversión de color y múltiples umbrales de contraste
+        function performDeepScan(ctx, width, height) {
+            try {
+                // Validaciones de seguridad
+                if (!ctx || !width || !height || width <= 0 || height <= 0) {
+                    console.warn('performDeepScan: Parámetros inválidos');
+                    return null;
+                }
+                
+                if (width > 10000 || height > 10000) {
+                    console.warn('performDeepScan: Imagen demasiado grande, omitiendo');
+                    return null;
+                }
+                
+                const imageData = ctx.getImageData(0, 0, width, height);
+                const originalData = imageData.data;
+                
+                // Verificar que los datos sean válidos
+                if (!originalData || originalData.length !== width * height * 4) {
+                    console.warn('performDeepScan: Datos de imagen inválidos');
+                    return null;
+                }
+
+                // 1. Intento Normal
+                try {
+                    let code = jsQR(originalData, width, height, { inversionAttempts: "dontInvert" });
+                    if (code && isCNMCData(code.data)) return code.data;
+                } catch(e) {
+                    console.warn('Error en intento normal:', e);
+                }
+
+                // 2. Intento Invertido
+                try {
+                    let code = jsQR(originalData, width, height, { inversionAttempts: "invertFirst" });
+                    if (code && isCNMCData(code.data)) return code.data;
+                } catch(e) {
+                    console.warn('Error en intento invertido:', e);
+                }
+
+                // 3. Barrido de Umbrales (Simulación de Auto-Exposición)
+                const thresholds = [80, 120, 160, 200]; // Oscuro -> Claro
+                
+                for (const threshold of thresholds) {
+                    try {
+                        const binarizedData = new Uint8ClampedArray(originalData.length);
+                        for (let i = 0; i < originalData.length; i += 4) {
+                            const luma = 0.299 * originalData[i] + 0.587 * originalData[i + 1] + 0.114 * originalData[i + 2];
+                            const val = luma < threshold ? 0 : 255;
+                            binarizedData[i] = val;
+                            binarizedData[i+1] = val;
+                            binarizedData[i+2] = val;
+                            binarizedData[i+3] = 255; 
+                        }
+                        
+                        const code = jsQR(binarizedData, width, height, { inversionAttempts: "dontInvert" });
+                        if (code && isCNMCData(code.data)) return code.data;
+                    } catch(e) {
+                        console.warn(`Error en umbral ${threshold}:`, e);
+                    }
+                }
+            } catch(e) {
+                console.error('Error general en performDeepScan:', e);
+            }
+
+            return null;
+        }
+        
+        // Función auxiliar para verificar si los datos son de CNMC
+        function isCNMCData(str) {
+            if (!str) return false;
+            if (str.includes('comparador.cnmc.gob.es')) return true;
+            // Detección laxa para datos en crudo (RAW)
+            if (str.includes('cups=') || str.includes('CUPS=')) {
+                if (str.includes('imp=') || str.includes('IMP=') || str.includes('cp=') || str.includes('CP=')) {
+                    return true;
+                }
+            }
+            return false;
+        }
+        
+        // Escaneo por Cuadrantes Avanzado (3x3 Grid con Solapamiento)
+        async function scanPageQuadrants(page, scale) {
+            try {
+                const viewport = page.getViewport({ scale: scale });
+                const canvas = document.createElement('canvas');
+                const context = canvas.getContext('2d');
+                canvas.width = viewport.width;
+                canvas.height = viewport.height;
+                
+                await page.render({ canvasContext: context, viewport: viewport }).promise;
+
+                const w = canvas.width, h = canvas.height;
+                
+                // Validar dimensiones
+                if (w <= 0 || h <= 0 || w > 15000 || h > 15000) {
+                    console.warn('scanPageQuadrants: Dimensiones inválidas');
+                    return null;
+                }
+                
+                // Creamos 9 zonas solapadas (3 columnas x 3 filas)
+                // Cada zona cubre el 50% del ancho/alto, moviéndose un 25% cada paso
+                // Esto asegura que ningún QR se corte por la mitad
+                const zones = [
+                    // Fila Superior
+                    { x: 0, y: 0, w: w/2, h: h/2 },
+                    { x: w/4, y: 0, w: w/2, h: h/2 },
+                    { x: w/2, y: 0, w: w/2, h: h/2 },
+                    // Fila Media
+                    { x: 0, y: h/4, w: w/2, h: h/2 },
+                    { x: w/4, y: h/4, w: w/2, h: h/2 }, // Centro puro
+                    { x: w/2, y: h/4, w: w/2, h: h/2 },
+                    // Fila Inferior
+                    { x: 0, y: h/2, w: w/2, h: h/2 },
+                    { x: w/4, y: h/2, w: w/2, h: h/2 },
+                    { x: w/2, y: h/2, w: w/2, h: h/2 }
+                ];
+
+                for (let z of zones) {
+                    try {
+                        // Validar zona
+                        if (z.w <= 0 || z.h <= 0) continue;
+                        
+                        const tempC = document.createElement('canvas');
+                        tempC.width = Math.floor(z.w);
+                        tempC.height = Math.floor(z.h);
+                        const tempCtx = tempC.getContext('2d');
+                        tempCtx.drawImage(canvas, z.x, z.y, z.w, z.h, 0, 0, tempC.width, tempC.height);
+                        
+                        const data = performDeepScan(tempCtx, tempC.width, tempC.height);
+                        if (data) {
+                            addProcessingLog('✓ ¡QR localizado en zona recortada (Grid 3x3)!', 'success');
+                            return data; 
+                        }
+                    } catch(zoneError) {
+                        console.warn('Error procesando zona:', zoneError);
+                    }
+                }
+            } catch(e) {
+                console.error('Error en scanPageQuadrants:', e);
+            }
+            return null;
+        }
+        
+        // ========== FIN TÉCNICAS AVANZADAS DE DEEP SCAN ==========
         
         // ==================== FIN FUNCIONES COMPLETAS ====================
         
@@ -27006,7 +27388,42 @@ ${clientName}
                 "Generar Comparativa →": { en: "Generate Comparison →", zh: "生成比较 →", de: "Vergleich erstellen →", fr: "Générer la Comparaison →" },
                 "SOLICITAR MEJORA A DRK": { en: "REQUEST IMPROVEMENT FROM DRK", zh: "向DRK请求改进", de: "VERBESSERUNG VON DRK ANFORDERN", fr: "DEMANDER UNE AMÉLIORATION À DRK" },
                 "Solicitar Mejora a DRK": { en: "Request Improvement from DRK", zh: "向DRK请求改进", de: "Verbesserung von DRK anfordern", fr: "Demander une Amélioration à DRK" },
-                "Ver desglose detallado del cálculo": { en: "View detailed calculation breakdown", zh: "查看详细计算明细", de: "Detaillierte Berechnungsaufschlüsselung anzeigen", fr: "Voir la répartition détaillée du calcul" }
+                "Ver desglose detallado del cálculo": { en: "View detailed calculation breakdown", zh: "查看详细计算明细", de: "Detaillierte Berechnungsaufschlüsselung anzeigen", fr: "Voir la répartition détaillée du calcul" },
+                
+                // NUEVAS: Traducciones para el informe de datos (sin emojis problemáticos)
+                "Información del Suministro": { en: "Supply Information", zh: "供应信息", de: "Versorgungsinformationen", fr: "Informations sur l'Approvisionnement" },
+                "Importe Total:": { en: "Total Amount:", zh: "总金额：", de: "Gesamtbetrag:", fr: "Montant Total:" },
+                "Fechas": { en: "Dates", zh: "日期", de: "Daten", fr: "Dates" },
+                "Periodo": { en: "Period", zh: "期间", de: "Zeitraum", fr: "Période" },
+                "días": { en: "days", zh: "天", de: "Tage", fr: "jours" },
+                "Picos Máximos Registrados:": { en: "Maximum Peaks Recorded:", zh: "记录的最大峰值：", de: "Maximal gemessene Spitzen:", fr: "Pics Maximaux Enregistrés:" },
+                "P1 (Punta):": { en: "P1 (Peak):", zh: "P1（峰值）：", de: "P1 (Spitzenlast):", fr: "P1 (Pointe):" },
+                "P2 (Valle):": { en: "P2 (Valley):", zh: "P2（谷段）：", de: "P2 (Schwachlast):", fr: "P2 (Creuse):" },
+                "Aprovechamiento:": { en: "Utilization:", zh: "利用率：", de: "Auslastung:", fr: "Utilisation:" },
+                "de la potencia contratada": { en: "of contracted power", zh: "合同功率", de: "der vertragl. Leistung", fr: "de la puissance contractée" },
+                "Estás pagando por mucha más potencia de la que usas": { en: "You are paying for much more power than you use", zh: "您支付的功率远超实际使用量", de: "Sie zahlen für viel mehr Leistung als Sie nutzen", fr: "Vous payez pour beaucoup plus de puissance que vous n'utilisez" },
+                "Desglose de Costes": { en: "Cost Breakdown", zh: "成本明细", de: "Kostenaufschlüsselung", fr: "Répartition des Coûts" },
+                "Término fijo (Potencia)": { en: "Fixed Term (Power)", zh: "固定费用（功率）", de: "Fixkosten (Leistung)", fr: "Terme Fixe (Puissance)" },
+                "Término variable (Energía)": { en: "Variable Term (Energy)", zh: "可变费用（能源）", de: "Variable Kosten (Energie)", fr: "Terme Variable (Énergie)" },
+                "Otros (Contador, etc.)": { en: "Others (Meter, etc.)", zh: "其他（电表等）", de: "Sonstige (Zähler usw.)", fr: "Autres (Compteur, etc.)" },
+                "Subtotal (sin impuestos)": { en: "Subtotal (before taxes)", zh: "小计（税前）", de: "Zwischensumme (vor Steuern)", fr: "Sous-total (hors taxes)" },
+                "El resto hasta": { en: "The rest up to", zh: "其余部分至", de: "Der Rest bis", fr: "Le reste jusqu'à" },
+                "corresponde a:": { en: "corresponds to:", zh: "对应于：", de: "entspricht:", fr: "correspond à:" },
+                "Impuesto Eléctrico (5.11%)": { en: "Electricity Tax (5.11%)", zh: "电费税（5.11%）", de: "Stromsteuer (5,11%)", fr: "Taxe sur l'Électricité (5,11%)" },
+                "IVA (21%)": { en: "VAT (21%)", zh: "增值税（21%）", de: "MwSt (21%)", fr: "TVA (21%)" },
+                "Histórico Acumulado (Ciclo Anual)": { en: "Cumulative History (Annual Cycle)", zh: "累计历史记录（年度周期）", de: "Kumulierte Historie (Jahreszyklus)", fr: "Historique Cumulé (Cycle Annuel)" },
+                "P1 (Punta):": { en: "P1 (Peak):", zh: "P1（峰值）：", de: "P1 (Spitzenlast):", fr: "P1 (Pointe):" },
+                "P2 (Llano):": { en: "P2 (Flat):", zh: "P2（平段）：", de: "P2 (Mittellast):", fr: "P2 (Pleine):" },
+                "P3 (Valle):": { en: "P3 (Valley):", zh: "P3（谷段）：", de: "P3 (Schwachlast):", fr: "P3 (Creuse):" },
+                "Total Acumulado:": { en: "Total Accumulated:", zh: "累计总计：", de: "Gesamtsumme:", fr: "Total Cumulé:" },
+                "Información Adicional": { en: "Additional Information", zh: "附加信息", de: "Zusätzliche Informationen", fr: "Informations Supplémentaires" },
+                "Fecha de factura:": { en: "Invoice date:", zh: "发票日期：", de: "Rechnungsdatum:", fr: "Date de facture:" },
+                "Comercializadora:": { en: "Supplier:", zh: "供应商：", de: "Versorger:", fr: "Fournisseur:" },
+                "Fin de contrato:": { en: "Contract end:", zh: "合同结束：", de: "Vertragsende:", fr: "Fin de contrat:" },
+                "Tipo de contrato:": { en: "Contract type:", zh: "合同类型：", de: "Vertragsart:", fr: "Type de contrat:" },
+                "Consumo por Periodo (kWh)": { en: "Consumption by Period (kWh)", zh: "按时段消耗（kWh）", de: "Verbrauch nach Zeitraum (kWh)", fr: "Consommation par Période (kWh)" },
+                "Total Consumo": { en: "Total Consumption", zh: "总消耗", de: "Gesamtverbrauch", fr: "Consommation Totale" },
+                "Potencia Contratada (kW)": { en: "Contracted Power (kW)", zh: "合同功率（kW）", de: "Vertragsleistung (kW)", fr: "Puissance Contractée (kW)" }
             };
 
             let lang = localStorage.getItem('appLanguage') || 'es';
