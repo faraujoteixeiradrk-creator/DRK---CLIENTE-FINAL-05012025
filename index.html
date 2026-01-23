@@ -320,7 +320,7 @@
         <!-- PANTALLA 2: ELECTRICIDAD (landing-view original) -->
         <div id="screen-electricidad" class="screen active">
         <!-- 1. Landing View -->
-        <div id="landing-view" class="fade-in flex flex-col items-center justify-center min-h-[60vh] py-8">
+        <div id="landing-view" style="display: none;" class="fade-in flex flex-col items-center justify-center min-h-[60vh] py-8">
             <div class="bg-white p-6 md:p-8 rounded-3xl shadow-2xl w-full border-t-4 border-drk-500" id="landing-card">
                 <div id="landing-icon-bg" class="w-16 h-16 bg-drk-50 rounded-full flex items-center justify-center mx-auto mb-4 text-drk-600 shadow-inner">
                     <svg class="w-8 h-8" viewBox="0 0 100 100" fill="none">
@@ -386,6 +386,70 @@
                     </div>
                 </div>
 
+            </div>
+        </div>
+        
+        <!-- NUEVA: Vista directa cliente con diseño Extractor Inteligente -->
+        <div id="client-direct-view" class="fade-in flex flex-col items-center justify-center min-h-screen py-12" style="background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);">
+            <!-- Inputs ocultos necesarios -->
+            <input type="file" id="camera-capture-input" accept="image/*" capture="environment" class="hidden">
+            <input type="file" id="file-upload-input" accept=".pdf,.jpg,.jpeg,.png,image/*,application/pdf" class="hidden">
+            
+            <!-- Header Extractor Inteligente -->
+            <div class="w-full max-w-5xl mb-12 text-center px-4">
+                <div class="flex items-center justify-center gap-4 mb-6">
+                    <svg class="w-16 h-16 md:w-20 md:h-20 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                    </svg>
+                    <h1 class="text-5xl md:text-6xl lg:text-7xl font-black text-blue-400">Extractor Inteligente</h1>
+                </div>
+                <p class="text-slate-400 text-base md:text-lg uppercase tracking-widest font-mono">
+                    ANALIZADOR DE FACTURAS ELÉCTRICAS CNMC
+                </p>
+            </div>
+            
+            <!-- Selector de idiomas -->
+            <div class="w-full max-w-5xl mb-8 flex flex-wrap justify-center gap-3 px-4">
+                <button onclick="if(window.LANG) window.LANG.change('es')" class="px-5 py-2.5 rounded-lg bg-slate-700/50 border-2 border-slate-600 hover:border-blue-400 hover:bg-slate-700 text-white font-semibold transition text-sm">
+                    🇪🇸 ES
+                </button>
+                <button onclick="if(window.LANG) window.LANG.change('en')" class="px-5 py-2.5 rounded-lg bg-slate-700/50 border-2 border-slate-600 hover:border-blue-400 hover:bg-slate-700 text-white font-semibold transition text-sm">
+                    🇬🇧 EN
+                </button>
+                <button onclick="if(window.LANG) window.LANG.change('zh')" class="px-5 py-2.5 rounded-lg bg-slate-700/50 border-2 border-slate-600 hover:border-blue-400 hover:bg-slate-700 text-white font-semibold transition text-sm">
+                    🇨🇳 ZH
+                </button>
+                <button onclick="if(window.LANG) window.LANG.change('fr')" class="px-5 py-2.5 rounded-lg bg-slate-700/50 border-2 border-slate-600 hover:border-blue-400 hover:bg-slate-700 text-white font-semibold transition text-sm">
+                    🇫🇷 FR
+                </button>
+                <button onclick="if(window.LANG) window.LANG.change('de')" class="px-5 py-2.5 rounded-lg bg-slate-700/50 border-2 border-slate-600 hover:border-blue-400 hover:bg-slate-700 text-white font-semibold transition text-sm">
+                    🇩🇪 DE
+                </button>
+            </div>
+            
+            <!-- Zona de Drag & Drop con diseño moderno -->
+            <div class="w-full max-w-5xl px-4">
+                <div id="drag-drop-zone-main" class="border-4 border-dashed border-blue-500/40 rounded-3xl p-12 md:p-20 text-center bg-slate-800/30 hover:bg-slate-800/50 hover:border-blue-400 transition-all duration-300 cursor-pointer backdrop-blur-sm">
+                    <!-- Iconos grandes -->
+                    <div class="flex items-center justify-center gap-8 mb-8">
+                        <svg class="w-20 h-20 md:w-28 md:h-28 text-slate-400" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6z"/>
+                            <path d="M14 2v6h6M10 13h4M10 17h4M10 9h1"/>
+                        </svg>
+                        <svg class="w-20 h-20 md:w-28 md:h-28 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/>
+                        </svg>
+                    </div>
+                    
+                    <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Arrastra PDF o Foto de Factura</h2>
+                    <p class="text-slate-300 text-base md:text-lg mb-2">
+                        Aceptamos <span class="text-blue-400 font-bold">PDF, JPG</span> o <span class="text-blue-400 font-bold">PNG</span>. Buscamos el código QR o el enlace
+                    </p>
+                    <p class="text-slate-300 text-base md:text-lg mb-4">
+                        oculto para extraer los datos.
+                    </p>
+                </div>
             </div>
         </div>
         </div> <!-- Cierre screen-electricidad -->
@@ -1129,8 +1193,8 @@
             </div>
         </div>
 
-        <!-- 3. Initial Input View (Scan/Manual) -->
-        <div id="initial-view" class="fade-in hidden">
+        <!-- 3. Initial Input View (Scan/Manual) - OCULTO PARA CLIENTE -->
+        <div id="initial-view" style="display: none !important;" class="fade-in hidden">
             <button onclick="currentTariffType === 'MULTICUPS' ? showMultiCupsSagaView() : goBackFromInitialView()" class="mb-4 text-sm text-slate-500 hover:text-drk-600 flex items-center gap-1">
                 &larr; Volver <span id="back-button-label">a selección</span>
             </button>
@@ -1324,9 +1388,9 @@
                     <span>AÑADIR A DUAL</span>
                 </button>
                 
-                <button id="send-offer-btn" class="w-full bg-cta-red-500 hover:bg-cta-red-600 text-white font-bold py-3 px-6 rounded-xl shadow-lg transform transition active:scale-95 flex items-center justify-center gap-3 mb-3">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2v-2m-4-4l-4 4m0 0l-4-4m4 4V5"></path></svg>
-                    <span>COPIAR COMPARATIVO</span>
+                <button onclick="sendClientEmail()" class="w-full bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-bold py-5 px-6 rounded-xl shadow-2xl transform transition active:scale-95 flex items-center justify-center gap-3 mb-3 text-xl">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                    <span>LO QUIERO</span>
                 </button>
                 
                 <!-- NUEVO: Botón para solicitar mejora cuando no hay ahorro -->
@@ -1335,7 +1399,12 @@
                     <span id="request-improvement-text">SOLICITAR MEJORA A DRK</span>
                 </button>
                 
-                <button onclick="document.getElementById('details-container').classList.toggle('hidden')" class="text-center text-drk-800 font-bold text-sm hover:underline flex items-center justify-center gap-1" id="details-toggle-btn"><span id="details-toggle-text"></span></button>
+                <button onclick="document.getElementById('details-container').classList.toggle('hidden'); return false;" class="w-full bg-gradient-to-r from-blue-50 to-cyan-50 border-2 border-blue-300 text-blue-800 font-bold py-4 px-6 rounded-xl hover:from-blue-100 hover:to-cyan-100 transition flex items-center justify-center gap-2 text-lg shadow-md" id="details-toggle-btn">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                    </svg>
+                    <span id="details-toggle-text">Ver desglose detallado del cálculo</span>
+                </button>
             </div>
             
             <div id="details-container" class="hidden space-y-6">
@@ -1453,7 +1522,8 @@
         <!-- 8. QR Options Modal (Upload/Paste) - CON DRAG & DROP -->
         <div id="qr-options-modal" class="fixed inset-0 bg-black/80 hidden items-center justify-center p-4 z-50 backdrop-blur-sm">
             <div class="bg-white p-6 rounded-2xl shadow-2xl max-w-sm w-full">
-                <h3 class="text-xl font-bold text-drk-800 mb-4" id="modal-qr-title">Seleccione Opción QR</h3>
+                <!-- Título OCULTO -->
+                <h3 style="display: none;" class="text-xl font-bold text-drk-800 mb-4" id="modal-qr-title">Seleccione Opción QR</h3>
                 
                 <!-- Input oculto para captura de foto -->
                 <input type="file" id="camera-capture-input" accept="image/*" capture="environment" class="hidden">
@@ -1471,27 +1541,29 @@
                     <p class="text-xs text-drk-600 mt-2 font-semibold">o haz clic para seleccionar</p>
                 </div>
                 
-                <!-- Botón Capturar Foto (primera opción) -->
-                <button id="camera-capture-btn" class="w-full bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-bold py-3 px-6 rounded-xl shadow-md mb-3 flex items-center justify-center gap-2">
+                <!-- Botón Capturar Foto (OCULTO) -->
+                <button id="camera-capture-btn" style="display: none;" class="w-full bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-bold py-3 px-6 rounded-xl shadow-md mb-3 flex items-center justify-center gap-2">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.125 3h3.75a2 2 0 011.664.89l.812 1.22a2 2 0 001.664.89H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
                     <span>Capturar Foto</span>
                 </button>
                 
-                <!-- Botón Subir desde Archivo -->
-                <button id="modal-upload-file-btn" class="w-full bg-drk-800 hover:bg-drk-900 text-white font-bold py-3 px-6 rounded-xl shadow-md mb-3 flex items-center justify-center gap-2">
+                <!-- Botón Subir desde Archivo (OCULTO) -->
+                <button id="modal-upload-file-btn" style="display: none;" class="w-full bg-drk-800 hover:bg-drk-900 text-white font-bold py-3 px-6 rounded-xl shadow-md mb-3 flex items-center justify-center gap-2">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
                     <span>Subir desde Archivo</span>
                 </button>
                 
-                <button id="modal-paste-image-btn" class="w-full bg-drk-600 hover:bg-drk-800 text-white font-bold py-3 px-6 rounded-xl shadow-md mb-3">Pegar Imagen (CTRL+V)</button>
+                <!-- Pegar Imagen (OCULTO) -->
+                <button id="modal-paste-image-btn" style="display: none;" class="w-full bg-drk-600 hover:bg-drk-800 text-white font-bold py-3 px-6 rounded-xl shadow-md mb-3">Pegar Imagen (CTRL+V)</button>
                 
-                <!-- Opción Pegar Código Completo -->
-                <button id="modal-paste-url-btn" class="w-full bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white font-bold py-3 px-6 rounded-xl shadow-md mb-4 flex items-center justify-center gap-2">
+                <!-- Opción Pegar Código Completo (OCULTO) -->
+                <button id="modal-paste-url-btn" style="display: none;" class="w-full bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white font-bold py-3 px-6 rounded-xl shadow-md mb-4 flex items-center justify-center gap-2">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
                     <span>Pegar Código Completo</span>
                 </button>
                 
-                <button onclick="document.getElementById('qr-options-modal').classList.add('hidden'); document.getElementById('qr-options-modal').classList.remove('flex');" class="w-full bg-slate-200 font-bold py-3 rounded-xl">Cancelar</button>
+                <!-- Botón Cancelar (OCULTO) -->
+                <button style="display: none;" onclick="document.getElementById('qr-options-modal').classList.add('hidden'); document.getElementById('qr-options-modal').classList.remove('flex');" class="w-full bg-slate-200 font-bold py-3 rounded-xl">Cancelar</button>
             </div>
         </div>
 
@@ -1675,7 +1747,7 @@
                     </div>
                     
                     <div class="flex flex-col gap-4">
-                        <!-- Opción 1: Mejor Opción (VISIBLE) -->
+                        <!-- Opción 1: Mejor Opción (CON SELECTOR PARA DRK) -->
                         <div class="rounded-xl border-2 border-slate-300 bg-white overflow-hidden">
                             <!-- Cabecera clickeable -->
                             <button onclick="handleBestOptionClick()" class="w-full text-left p-6 hover:bg-drk-50 transition group">
@@ -1734,7 +1806,7 @@
                             </div>
                         </div>
                         
-                        <!-- Opción 2: Elegir Manual (OCULTO EN VERSIÓN 1) -->
+                        <!-- Opción 2: Elegir Manual (OCULTO EN VERSIÓN SIMPLE "MEJOR OPCIÓN") -->
                         <button onclick="selectFromResults()" class="text-left p-6 rounded-xl border-2 border-slate-300 bg-white hover:border-drk-500 hover:bg-drk-50 transition group" style="display: none;">
                             <div class="flex items-start gap-4">
                                 <div class="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0 group-hover:bg-blue-200">
@@ -3165,6 +3237,7 @@
                 document.getElementById('initial-view').classList.add('hidden');
                 document.getElementById('scanner-view').classList.add('hidden');
                 document.getElementById('results-view').classList.remove('hidden');
+                setTimeout(() => showCleanResultsPage(), 800);
                 
                 console.log('=== COMPARACIÓN DUAL COMPLETADA ===');
                 
@@ -4161,6 +4234,7 @@
                 } else {
                     // Flujo normal - mostrar resultados
                     document.getElementById('results-view').classList.remove('hidden');
+                    setTimeout(() => showCleanResultsPage(), 800);
                     document.getElementById('results-view').classList.add('animate-fade-in-up');
                     
                     // Detectar modo DUAL y mostrar botón si corresponde
@@ -4444,6 +4518,7 @@
             document.getElementById('initial-view').classList.add('hidden');
             document.getElementById('multicups-saga-view').classList.add('hidden');
             document.getElementById('scanner-view').classList.add('hidden');
+            setTimeout(() => showCleanResultsPage(), 800);
             document.getElementById('results-view').classList.remove('hidden');
             document.getElementById('results-view').classList.add('animate-fade-in-up');
         }
@@ -5587,18 +5662,142 @@
                 });
 
                 consumptionHTML = `
-                    <div class="grid grid-cols-2 gap-4">
-                        <div><p class="text-xs text-slate-500">${tr('Periodo')}</p><p class="font-bold text-slate-700">${res.dias_facturados} ${tr('días')}</p></div>
-                        <div><p class="text-xs text-slate-500">${tr('Fechas')}</p><p class="font-bold text-slate-700 text-xs">${res.fechas}</p></div>
-                        <div class="col-span-2 border-t pt-2 mt-2">
-                            <p class="font-bold ${brand.PRIMARY_TEXT} mb-2">${tr('Consumo por Periodo (kWh)')}</p>
-                            ${energyRows}
-                            <div class="flex justify-between font-bold ${brand.PRIMARY_TEXT} mt-1 border-t pt-1"><span>${tr('Total Consumo')}</span><span>${num(totalEnergy, 0)} kWh</span></div>  
+                    <div class="space-y-4">
+                        <!-- Información Principal -->
+                        <div class="bg-gradient-to-r from-blue-50 to-cyan-50 p-4 rounded-lg border-2 border-blue-200">
+                            <p class="text-xs font-bold text-blue-900 uppercase mb-2">📋 Información del Suministro</p>
+                            <div class="grid grid-cols-1 gap-2">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-xs text-slate-600">CUPS:</span>
+                                    <span class="font-mono font-bold text-xs text-slate-900">${res.cups || 'N/A'}</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-xs text-slate-600">Importe Total:</span>
+                                    <span class="font-bold text-lg ${brand.PRIMARY_TEXT}">${num(res.importe_total || 0, 2)} €</span>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-span-2">
-                            <p class="font-bold ${brand.PRIMARY_TEXT} mb-2">${tr('Potencia Contratada (kW)')}</p>
-                            ${powerRows}
+
+                        <!-- Periodo de Facturación -->
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="bg-white p-3 rounded-lg border border-slate-200">
+                                <p class="text-xs text-slate-500 mb-1">📅 Periodo</p>
+                                <p class="font-bold text-slate-900">${res.dias_facturados} ${tr('días')}</p>
+                            </div>
+                            <div class="bg-white p-3 rounded-lg border border-slate-200">
+                                <p class="text-xs text-slate-500 mb-1">📆 Fechas</p>
+                                <p class="font-bold text-slate-900 text-xs">${res.fechas}</p>
+                            </div>
                         </div>
+
+                        <!-- Consumo de Energía -->
+                        <div class="bg-white p-4 rounded-lg border-2 border-green-200">
+                            <p class="font-bold ${brand.PRIMARY_TEXT} mb-3 flex items-center gap-2">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                                </svg>
+                                ${tr('Consumo por Periodo (kWh)')}
+                            </p>
+                            <div class="space-y-1">
+                                ${energyRows}
+                            </div>
+                            <div class="flex justify-between font-bold ${brand.PRIMARY_TEXT} mt-3 pt-2 border-t-2 border-green-200">
+                                <span>${tr('Total Consumo')}</span>
+                                <span class="text-lg">${num(totalEnergy, 0)} kWh</span>
+                            </div>  
+                        </div>
+
+                        <!-- Potencia Contratada vs Uso Real -->
+                        <div class="bg-white p-4 rounded-lg border-2 border-amber-200">
+                            <p class="font-bold ${brand.PRIMARY_TEXT} mb-3 flex items-center gap-2">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                                </svg>
+                                ${tr('Potencia Contratada (kW)')}
+                            </p>
+                            <div class="space-y-1">
+                                ${powerRows}
+                            </div>
+                            ${res.potencia_max_p1 || res.potencia_max_p2 ? `
+                                <div class="mt-4 p-3 bg-amber-50 rounded-lg border border-amber-300">
+                                    <p class="text-xs font-bold text-amber-900 mb-2">⚡ Picos Máximos Registrados:</p>
+                                    ${res.potencia_max_p1 ? `<div class="flex justify-between text-xs"><span>P1 (Punta):</span><span class="font-bold">${num(res.potencia_max_p1, 3)} kW</span></div>` : ''}
+                                    ${res.potencia_max_p2 ? `<div class="flex justify-between text-xs"><span>P2 (Valle):</span><span class="font-bold">${num(res.potencia_max_p2, 3)} kW</span></div>` : ''}
+                                    ${res.potencia_p1_kw && res.potencia_max_p1 ? `
+                                        <div class="mt-2 pt-2 border-t border-amber-200">
+                                            <p class="text-xs text-amber-800">
+                                                <span class="font-bold">Aprovechamiento:</span> ${num((res.potencia_max_p1 / res.potencia_p1_kw) * 100, 0)}% de la potencia contratada
+                                            </p>
+                                            ${((res.potencia_max_p1 / res.potencia_p1_kw) * 100) < 50 ? `<p class="text-xs text-red-600 mt-1">⚠️ Estás pagando por mucha más potencia de la que usas</p>` : ''}
+                                        </div>
+                                    ` : ''}
+                                </div>
+                            ` : ''}
+                        </div>
+
+                        <!-- Costes Desglosados -->
+                        ${res.coste_potencia || res.coste_energia || res.otros_costes ? `
+                            <div class="bg-gradient-to-r from-purple-50 to-pink-50 p-4 rounded-lg border-2 border-purple-200">
+                                <p class="font-bold text-purple-900 mb-3 flex items-center gap-2">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                    </svg>
+                                    💰 Desglose de Costes
+                                </p>
+                                <div class="space-y-2">
+                                    ${res.coste_potencia ? `<div class="flex justify-between items-center bg-white p-2 rounded"><span class="text-sm text-slate-700">Término fijo (Potencia)</span><span class="font-bold text-purple-700">${num(res.coste_potencia, 2)} €</span></div>` : ''}
+                                    ${res.coste_energia ? `<div class="flex justify-between items-center bg-white p-2 rounded"><span class="text-sm text-slate-700">Término variable (Energía)</span><span class="font-bold text-purple-700">${num(res.coste_energia, 2)} €</span></div>` : ''}
+                                    ${res.otros_costes ? `<div class="flex justify-between items-center bg-white p-2 rounded"><span class="text-sm text-slate-700">Otros (Contador, etc.)</span><span class="font-bold text-purple-700">${num(res.otros_costes, 2)} €</span></div>` : ''}
+                                    ${res.coste_potencia && res.coste_energia ? `
+                                        <div class="flex justify-between items-center bg-purple-100 p-2 rounded border-t-2 border-purple-300 mt-2">
+                                            <span class="text-sm font-bold text-purple-900">Subtotal (sin impuestos)</span>
+                                            <span class="font-bold text-lg text-purple-900">${num((res.coste_potencia || 0) + (res.coste_energia || 0) + (res.otros_costes || 0), 2)} €</span>
+                                        </div>
+                                        <div class="text-xs text-slate-600 mt-2 bg-white p-2 rounded">
+                                            <p class="mb-1">El resto hasta <strong>${num(res.importe_total, 2)} €</strong> corresponde a:</p>
+                                            <ul class="list-disc list-inside pl-2 space-y-1">
+                                                <li>Impuesto Eléctrico (5.11%)</li>
+                                                <li>IVA (21%)</li>
+                                            </ul>
+                                        </div>
+                                    ` : ''}
+                                </div>
+                            </div>
+                        ` : ''}
+
+                        <!-- Histórico Acumulado Anual -->
+                        ${res.consumo_anual_p1 || res.consumo_anual_p2 || res.consumo_anual_p3 ? `
+                            <div class="bg-gradient-to-r from-indigo-50 to-blue-50 p-4 rounded-lg border-2 border-indigo-200">
+                                <p class="font-bold text-indigo-900 mb-3 flex items-center gap-2">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                                    </svg>
+                                    📊 Histórico Acumulado (Ciclo Anual)
+                                </p>
+                                <div class="space-y-2">
+                                    ${res.consumo_anual_p1 ? `<div class="flex justify-between text-sm"><span class="text-slate-700">P1 (Punta):</span><span class="font-bold text-indigo-700">${num(res.consumo_anual_p1, 0)} kWh</span></div>` : ''}
+                                    ${res.consumo_anual_p2 ? `<div class="flex justify-between text-sm"><span class="text-slate-700">P2 (Llano):</span><span class="font-bold text-indigo-700">${num(res.consumo_anual_p2, 0)} kWh</span></div>` : ''}
+                                    ${res.consumo_anual_p3 ? `<div class="flex justify-between text-sm"><span class="text-slate-700">P3 (Valle):</span><span class="font-bold text-indigo-700">${num(res.consumo_anual_p3, 0)} kWh</span></div>` : ''}
+                                    <div class="flex justify-between bg-indigo-100 p-2 rounded border-t-2 border-indigo-300 mt-2">
+                                        <span class="text-sm font-bold text-indigo-900">Total Acumulado:</span>
+                                        <span class="font-bold text-lg text-indigo-900">${num((res.consumo_anual_p1 || 0) + (res.consumo_anual_p2 || 0) + (res.consumo_anual_p3 || 0), 0)} kWh</span>
+                                    </div>
+                                </div>
+                            </div>
+                        ` : ''}
+
+                        <!-- Información Adicional -->
+                        ${res.fecha_factura || res.comercializadora || res.fecha_fin_contrato ? `
+                            <div class="bg-slate-50 p-4 rounded-lg border border-slate-200">
+                                <p class="font-bold text-slate-800 mb-3 text-sm">ℹ️ Información Adicional</p>
+                                <div class="grid grid-cols-1 gap-2 text-xs">
+                                    ${res.fecha_factura ? `<div class="flex justify-between"><span class="text-slate-600">Fecha de factura:</span><span class="font-mono font-bold">${res.fecha_factura}</span></div>` : ''}
+                                    ${res.comercializadora ? `<div class="flex justify-between"><span class="text-slate-600">Comercializadora:</span><span class="font-bold">${res.comercializadora}</span></div>` : ''}
+                                    ${res.fecha_fin_contrato ? `<div class="flex justify-between"><span class="text-slate-600">Fin de contrato:</span><span class="font-mono font-bold">${res.fecha_fin_contrato}</span></div>` : ''}
+                                    ${res.tipo_contrato ? `<div class="flex justify-between"><span class="text-slate-600">Tipo de contrato:</span><span class="font-bold">${res.tipo_contrato}</span></div>` : ''}
+                                </div>
+                            </div>
+                        ` : ''}
                     </div>
                 `;
             } else {
@@ -5777,22 +5976,22 @@
                             
                             <!-- Contenedor de tabs con scroll -->
                             <div id="tabs-container" class="flex overflow-x-auto scrollbar-hide scroll-smooth" style="scroll-behavior: smooth;">
-                                <button onclick="showSection('analisis')" id="btn-analisis"
+                                <button onclick="event.preventDefault(); event.stopPropagation(); showSection('analisis'); return false;" id="btn-analisis"
                                         class="section-tab flex-1 min-w-fit px-4 py-3 text-sm font-semibold text-slate-600 hover:text-drk-600 hover:bg-drk-50 border-b-3 border-transparent transition-all whitespace-nowrap">
                                     <svg class="w-4 h-4 inline mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                                     ${tr('Análisis de Horarios')}
                                 </button>
-                                <button onclick="showSection('datos-extraidos')" id="btn-datos-extraidos"
+                                <button onclick="event.preventDefault(); event.stopPropagation(); showSection('datos-extraidos'); return false;" id="btn-datos-extraidos"
                                         class="section-tab flex-1 min-w-fit px-4 py-3 text-sm font-semibold text-slate-600 hover:text-drk-600 hover:bg-drk-50 border-b-3 border-transparent transition-all whitespace-nowrap">
                                     <svg class="w-4 h-4 inline mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
                                     ${tr('Datos Extraídos')}
                                 </button>
-                                <button onclick="showSection('precios')" id="btn-precios"
+                                <button onclick="event.preventDefault(); event.stopPropagation(); showSection('precios'); return false;" id="btn-precios"
                                         class="section-tab flex-1 min-w-fit px-4 py-3 text-sm font-semibold text-slate-600 hover:text-drk-600 hover:bg-drk-50 border-b-3 border-transparent transition-all whitespace-nowrap">
                                     <svg class="w-4 h-4 inline mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                                     ${tr('Precios Ofertas')}
                                 </button>
-                                <button onclick="showSection('calculo')" id="btn-calculo"
+                                <button onclick="event.preventDefault(); event.stopPropagation(); showSection('calculo'); return false;" id="btn-calculo"
                                         class="section-tab flex-1 min-w-fit px-4 py-3 text-sm font-semibold text-slate-600 hover:text-drk-600 hover:bg-drk-50 border-b-3 border-transparent transition-all whitespace-nowrap">
                                     <svg class="w-4 h-4 inline mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
                                     ${tr('Cálculo Oficial')}
@@ -5968,6 +6167,10 @@
         
         // === FUNCIÓN PARA NAVEGACIÓN POR PESTAÑAS ===
         window.showSection = function(sectionName) {
+            // Guardar posición de scroll actual
+            const currentScrollY = window.scrollY || window.pageYOffset;
+            const currentScrollX = window.scrollX || window.pageXOffset;
+            
             // Ocultar todas las secciones
             const sections = document.querySelectorAll('.section-content');
             sections.forEach(section => {
@@ -5992,8 +6195,12 @@
                 activeButton.classList.add('active');
             }
             
-            // Scroll suave al inicio de la sección
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            // CRÍTICO: NO scrollear - mantener posición actual
+            setTimeout(() => {
+                window.scrollTo(currentScrollX, currentScrollY);
+            }, 0);
+            
+            return false;
         };
         
         // === INICIALIZAR PRIMERA PESTAÑA ===
@@ -15988,6 +16195,45 @@ Destinatarios: F.araujo@drk.es, rguerra@drk.es, l.grande@drk.es
                 }
             });
             
+            // === CONFIGURACIÓN DRAG & DROP PARA ZONA PRINCIPAL ===
+            const dragDropZoneMain = document.getElementById('drag-drop-zone-main');
+            
+            if (dragDropZoneMain) {
+                // Click en zona
+                dragDropZoneMain.addEventListener('click', () => {
+                    fileUploadInput.click();
+                });
+                
+                // Prevenir comportamiento por defecto
+                ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+                    dragDropZoneMain.addEventListener(eventName, (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                    });
+                });
+                
+                // Efectos visuales
+                ['dragenter', 'dragover'].forEach(eventName => {
+                    dragDropZoneMain.addEventListener(eventName, () => {
+                        dragDropZoneMain.classList.add('border-drk-600', 'bg-drk-100');
+                    });
+                });
+                
+                ['dragleave', 'drop'].forEach(eventName => {
+                    dragDropZoneMain.addEventListener(eventName, () => {
+                        dragDropZoneMain.classList.remove('border-drk-600', 'bg-drk-100');
+                    });
+                });
+                
+                // Manejar drop
+                dragDropZoneMain.addEventListener('drop', (e) => {
+                    const files = e.dataTransfer.files;
+                    if (files.length > 0) {
+                        handleFile(files[0]);
+                    }
+                });
+            }
+            
             // Manejar selección de archivo desde input
             fileUploadInput.addEventListener('change', (e) => {
                 if (e.target.files.length > 0) {
@@ -17634,14 +17880,32 @@ Destinatarios: F.araujo@drk.es, rguerra@drk.es, l.grande@drk.es
             const directData = {
                 cups: p.cups || 'QR SCAN',
                 dias_facturados: billingDays,
-                importe_total: parseFloat(p.imp || 0), // FIX: asegurar que es float, default a 0
+                importe_total: parseFloat(p.imp || 0),
                 potencia_p1_kw: parseFloat(p.pP1 || 0),
                 potencia_p2_kw: parseFloat(p.pP2 || 0),
-                // Solo se reciben 3 consumos del QR de la CNMC (P1, P2, P3 -> Punta, Llano, Valle)
                 consumo_punta: parseFloat(p.cfP1 || 0),
                 consumo_llano: parseFloat(p.cfP2 || 0),
                 consumo_valle: parseFloat(p.cfP3 || 0),
                 fechas: dateRangeStr,
+                // NUEVOS CAMPOS AMPLIADOS del QR
+                potencia_max_p1: parseFloat(p.pmaxP1 || 0),
+                potencia_max_p2: parseFloat(p.pmaxP2 || 0),
+                consumo_anual_p1: parseFloat(p.caP1 || 0),
+                consumo_anual_p2: parseFloat(p.caP2 || 0),
+                consumo_anual_p3: parseFloat(p.caP3 || 0),
+                coste_potencia: parseFloat(p.impPot || 0),
+                coste_energia: parseFloat(p.impEner || 0),
+                otros_costes: parseFloat(p.impOtrosSinIE || 0),
+                precio_potencia_p1: parseFloat(p.prP1 || 0),
+                precio_potencia_p2: parseFloat(p.prP2 || 0),
+                precio_energia_p1: parseFloat(p.prE1 || 0),
+                precio_energia_p2: parseFloat(p.prE2 || 0),
+                precio_energia_p3: parseFloat(p.prE3 || 0),
+                fecha_factura: p.fFact || '',
+                fecha_fin_contrato: p.finContrato || '',
+                tipo_contrato: p.tc || '',
+                tipo_factura: p.tf || '',
+                comercializadora: p.com || '',
                 rawQR: raw  
             };
             
@@ -27411,6 +27675,13 @@ ${clientName}
 
             window.addEventListener('load', () => {
                 setTimeout(() => window.LANG.retranslate(), 200);
+                
+                // Cargar tarifas 2.0TD directamente SIN cambiar de vista
+                setTimeout(() => {
+                    console.log('🔄 Cargando tarifas 2.0TD para cliente...');
+                    currentTariffType = '2.0TD';
+                    fetchTariffsFromSheet('2.0TD');
+                }, 800);
             });
         })();
         
@@ -27431,6 +27702,240 @@ ${clientName}
                     left: scrollAmount,
                     behavior: 'smooth'
                 });
+            }
+        }
+        
+        function sendClientEmail() {
+            const cups = document.getElementById('cups-value')?.textContent || 'Pendiente';
+            const lang = document.getElementById('language-selector')?.value || 'es';
+            const to = 'f.araujo@drk.es,rguerra@drk.es,s.caballero@drk.es';
+            const subject = 'Estimado DRK: Estoy interesado en los precios de la oferta';
+            const body = `Estimado DRK,
+
+Estoy interesado en los precios de la oferta. Adjunto la siguiente información para la contratación:
+
+- Foto DNI
+- Email de validación de contrato
+- Teléfono de validación de contrato
+- Número de cuenta bancaria
+- Factura eléctrica (no puede ser más antigua de 3 meses desde la fecha actual)
+
+CUPS: ${cups}
+Idioma: ${lang.toUpperCase()}
+
+Gracias.`;
+            window.location.href = `mailto:${to}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        }
+        
+        function showCleanResultsPage() {
+            // Capturar TODO el contenido HTML del results-view antes de reemplazar
+            const resultsView = document.getElementById('results-view');
+            if (!resultsView) return;
+            
+            // Clonar todo el contenido
+            const fullContent = resultsView.innerHTML;
+            
+            // Reemplazar TODA la página con versión limpia que incluye TODO
+            document.body.innerHTML = `
+                <style>
+                    * { margin: 0; padding: 0; box-sizing: border-box; }
+                    body { font-family: 'Inter', system-ui, sans-serif; background: #f1f5f9; min-height: 100vh; padding: 2rem 1rem; }
+                    .clean-container { max-width: 56rem; margin: 0 auto; }
+                    .back-section { margin-bottom: 2rem; }
+                    .btn-back { background: #fff; border: 2px solid #e2e8f0; color: #475569; font-weight: 700; padding: .75rem 1.5rem; border-radius: .75rem; cursor: pointer; display: inline-flex; align-items: center; gap: .5rem; transition: all .2s; }
+                    .btn-back:hover { background: #f8fafc; border-color: #cbd5e1; }
+                    
+                    /* Mantener todos los estilos originales de Tailwind */
+                    .hidden { display: none !important; }
+                    .mb-8 { margin-bottom: 2rem; }
+                    .mb-6 { margin-bottom: 1.5rem; }
+                    .mb-4 { margin-bottom: 1rem; }
+                    .mb-3 { margin-bottom: 0.75rem; }
+                    .mb-2 { margin-bottom: 0.5rem; }
+                    .mb-1 { margin-bottom: 0.25rem; }
+                    .mt-8 { margin-top: 2rem; }
+                    .p-6 { padding: 1.5rem; }
+                    .p-3 { padding: 0.75rem; }
+                    .py-5 { padding-top: 1.25rem; padding-bottom: 1.25rem; }
+                    .py-4 { padding-top: 1rem; padding-bottom: 1rem; }
+                    .py-3 { padding-top: 0.75rem; padding-bottom: 0.75rem; }
+                    .px-6 { padding-left: 1.5rem; padding-right: 1.5rem; }
+                    .px-3 { padding-left: 0.75rem; padding-right: 0.75rem; }
+                    .rounded-3xl { border-radius: 1.5rem; }
+                    .rounded-2xl { border-radius: 1rem; }
+                    .rounded-xl { border-radius: 0.75rem; }
+                    .rounded-full { border-radius: 9999px; }
+                    .shadow-2xl { box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); }
+                    .shadow-lg { box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); }
+                    .text-center { text-align: center; }
+                    .text-xl { font-size: 1.25rem; }
+                    .text-2xl { font-size: 1.5rem; }
+                    .text-5xl { font-size: 3rem; }
+                    .font-black { font-weight: 900; }
+                    .font-bold { font-weight: 700; }
+                    .text-slate-800 { color: #1e293b; }
+                    .text-slate-600 { color: #475569; }
+                    .text-slate-500 { color: #64748b; }
+                    .text-white { color: #fff; }
+                    .bg-white { background-color: #fff; }
+                    .bg-green-100 { background-color: #dcfce7; }
+                    .text-green-800 { color: #166534; }
+                    .bg-green-500 { background-color: #22c55e; }
+                    .border { border-width: 1px; }
+                    .border-2 { border-width: 2px; }
+                    .border-slate-100 { border-color: #f1f5f9; }
+                    .border-slate-200 { border-color: #e2e8f0; }
+                    .overflow-hidden { overflow: hidden; }
+                    .inline-flex { display: inline-flex; }
+                    .flex { display: flex; }
+                    .items-center { align-items: center; }
+                    .justify-center { justify-content: center; }
+                    .gap-2 { gap: 0.5rem; }
+                    .gap-3 { gap: 0.75rem; }
+                    .gap-6 { gap: 1.5rem; }
+                    .w-full { width: 100%; }
+                    .w-2 { width: 0.5rem; }
+                    .w-8 { width: 2rem; }
+                    .h-2 { height: 0.5rem; }
+                    .h-8 { height: 2rem; }
+                    .text-xs { font-size: 0.75rem; line-height: 1rem; }
+                    .text-sm { font-size: 0.875rem; line-height: 1.25rem; }
+                    .uppercase { text-transform: uppercase; }
+                    .tracking-wider { letter-spacing: 0.05em; }
+                    .tracking-tight { letter-spacing: -0.025em; }
+                    .font-mono { font-family: ui-monospace, monospace; }
+                    .animate-pulse { animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+                    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: .5; } }
+                    .bg-gradient-to-r { background-image: linear-gradient(to right, var(--tw-gradient-stops)); }
+                    .from-drk-800 { --tw-gradient-from: #075985; --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgba(7, 89, 133, 0)); }
+                    .to-drk-600 { --tw-gradient-to: #0284c7; }
+                    .from-red-600 { --tw-gradient-from: #dc2626; --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgba(220, 38, 38, 0)); }
+                    .to-red-700 { --tw-gradient-to: #b91c1c; }
+                    .hover\\:from-red-700:hover { --tw-gradient-from: #b91c1c; }
+                    .hover\\:to-red-800:hover { --tw-gradient-to: #991b1b; }
+                    .hover\\:underline:hover { text-decoration: underline; }
+                    .hover\\:border-drk-500:hover { border-color: #0ea5e9; }
+                    .hover\\:text-drk-800:hover { color: #075985; }
+                    .transition { transition-property: all; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); transition-duration: 150ms; }
+                    .active\\:scale-95:active { transform: scale(0.95); }
+                    .transform { transform: translateX(0) translateY(0) rotate(0) skewX(0) skewY(0) scaleX(1) scaleY(1); }
+                    .grid { display: grid; }
+                    .grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+                    .grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+                    .gap-3 { gap: 0.75rem; }
+        
+        // Función para mostrar secciones del carrusel SIN scroll automático
+        window.showSection = function(sectionId) {
+            // PASO 1: Guardar la posición exacta del scroll
+            const savedScrollY = window.scrollY || window.pageYOffset;
+            const savedScrollX = window.scrollX || window.pageXOffset;
+            
+            // PASO 2: Bloquear temporalmente el scroll
+            const originalOverflow = document.body.style.overflow;
+            const originalPosition = document.documentElement.style.scrollBehavior;
+            
+            document.body.style.overflow = 'hidden';
+            document.documentElement.style.scrollBehavior = 'auto';
+            
+            // PASO 3: Hacer los cambios de UI
+            // Ocultar todas las secciones
+            document.querySelectorAll('.section-content').forEach(s => s.style.display = 'none');
+            
+            // Remover clase activa de todos los tabs
+            document.querySelectorAll('.section-tab').forEach(t => {
+                t.classList.remove('text-drk-600', 'bg-drk-50', 'border-drk-500');
+                t.classList.add('text-slate-600', 'border-transparent');
+            });
+            
+            // Mostrar sección seleccionada
+            const section = document.getElementById('section-' + sectionId);
+            if (section) {
+                section.style.display = 'block';
+            }
+            
+            // Activar tab correspondiente
+            const btn = document.getElementById('btn-' + sectionId);
+            if (btn) {
+                btn.classList.remove('text-slate-600', 'border-transparent');
+                btn.classList.add('text-drk-600', 'bg-drk-50', 'border-drk-500');
+            }
+            
+            // PASO 4: Forzar la posición del scroll múltiples veces
+            window.scrollTo(savedScrollX, savedScrollY);
+            
+            requestAnimationFrame(() => {
+                window.scrollTo(savedScrollX, savedScrollY);
+                
+                setTimeout(() => {
+                    window.scrollTo(savedScrollX, savedScrollY);
+                    
+                    // Desbloquear el scroll
+                    document.body.style.overflow = originalOverflow;
+                    document.documentElement.style.scrollBehavior = originalPosition;
+                    
+                    // Una última verificación
+                    window.scrollTo(savedScrollX, savedScrollY);
+                }, 10);
+            });
+            
+            // Prevenir cualquier comportamiento por defecto
+            return false;
+        };
+        
+        // Función para scroll del carrusel de tabs
+        window.scrollTabs = function(direction) {
+            const container = document.getElementById('tabs-container');
+            if (!container) return;
+            
+            const scrollAmount = 200;
+            if (direction === 'left') {
+                container.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+            } else {
+                container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+            }
+        };
+                    .space-y-6 > * + * { margin-top: 1.5rem; }
+                    .border-b { border-bottom-width: 1px; }
+                    .pb-4 { padding-bottom: 1rem; }
+                    .pr-2 { padding-right: 0.5rem; }
+                    .pl-2 { padding-left: 0.5rem; }
+                    .border-r { border-right-width: 1px; }
+                    .line-through { text-decoration: line-through; }
+                    .decoration-2 { text-decoration-thickness: 2px; }
+                    .text-cta-green-500 { color: #16a34a; }
+                    .text-cta-red-500 { color: #dc2626; }
+                    .text-drk-800 { color: #075985; }
+                    .text-drk-900 { color: #0c4a6e; }
+                    .text-drk-100 { color: #e0f2fe; }
+                    .bg-drk-800 { background-color: #075985; }
+                    .bg-drk-600 { background-color: #0284c7; }
+                    .opacity-90 { opacity: 0.9; }
+                    .relative { position: relative; }
+                    .flex-col { flex-direction: column; }
+                </style>
+                
+                <div class="clean-container">
+                    <div class="back-section">
+                        <button class="btn-back" onclick="window.location.reload()">
+                            <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+                            </svg>
+                            Realizar Nueva Comparación
+                        </button>
+                    </div>
+                    
+                    <div id="results-content">
+                        ${fullContent}
+                    </div>
+                </div>
+            `;
+            
+            // Re-inicializar event listeners si es necesario
+            const detailsBtn = document.getElementById('details-toggle-btn');
+            if (detailsBtn) {
+                detailsBtn.onclick = function() {
+                    document.getElementById('details-container').classList.toggle('hidden');
+                };
             }
         }
     </script>
